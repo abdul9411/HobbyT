@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://dbUser:dbUser@cluster0.oss8k.mongodb.net/3100projectDB?retryWrites=true&w=majority",
+  "jwtSecret": "sl_myJwtSecret"
+}
