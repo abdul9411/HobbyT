@@ -19,15 +19,6 @@ div a{
   text-decoration: none;
 }
 
-.vl {
-  border-left: 1px solid #8d93ab;
-  position: absolute;
-  height: 100%;
-  left: 50%;
-  margin-left: -3px;
-  top: 0;
-}
-
 .left-container {
   position: absolute;
   padding: 200px 0 0 50px;
@@ -42,10 +33,4 @@ div a{
   margin-top: 200px;
   text-align: center;
   padding-bottom: 10px;
-}
-
-.right-container {
-  position: absolute;
-  width: 50%;
-  right: 0;
 }

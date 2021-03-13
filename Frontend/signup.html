@@ -13,16 +13,16 @@
     <h2>Create your account</h2>
     <form action="/register" method="post">
       <div class="mb-3">
-        <input class="form-control form-control-lg" type="text" name="Username" placeholder="Username">
+        <input class="form-control form-control-lg" type="text" name="Username" placeholder="Username" required>
       </div>
       <div class="mb-3">
-        <input class="form-control form-control-lg" type="email" name="email" placeholder="Email">
+        <input class="form-control form-control-lg" type="email" name="email" placeholder="Email" required>
       </div>
       <div class="mb-3">
-        <input class="form-control form-control-lg" type="password" name="password" placeholder="Password">
+        <input class="form-control form-control-lg" type="password" name="password" placeholder="Password" required>
       </div>
       <div class="mb-3">
-        <input class="form-control form-control-lg" type="password" name="confirm-password" placeholder="Confirm password">
+        <input class="form-control form-control-lg" type="password" name="confirm-password" placeholder="Confirm password" required>
       </div>
       <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
     </form>
