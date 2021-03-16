@@ -8,7 +8,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-import ForgotPassword from "./components/forgotpassword/forgotpassword";
 import Login from "./components/login/login";
 import SignUp from "./components/signup/signup";
 
@@ -60,9 +59,6 @@ function App() {
         </Route>
         <Route exact path="/">
           <Login />
-        </Route>
-        <Route path="/forgotpassword">
-          <ForgotPassword />
         </Route>
         <Route path="/login">
           <Login />

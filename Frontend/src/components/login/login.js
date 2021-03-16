@@ -45,7 +45,6 @@ function logIn() {
                             </div>
                             <button type="submit" className="btn btn-primary btn-lg">Log in</button>
                         </form>
-                        <a href="/forgotpassword">Forgot password?</a>
                         <hr />
                         <form>
                             <a href="/signup"><button type="button" className="btn btn-primary btn-lg">Sign up</button></a>
