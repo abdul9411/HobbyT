@@ -13,6 +13,7 @@ const config = require("config");
 // routes
 //import authRoutes from './routes/api/auth';
 const authRoutes = require("./routes/api/auth");
+const commRoutes = require("./routes/api/community");
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ mongoose
 
 // Use Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/community', commRoutes);
 app.use(bodyParser.xml());
 
 const port = process.env.PORT || 3001;
