@@ -10,7 +10,10 @@ function logIn() {
     const div = logInStyle.div
 
     return (
+
+
         <div className="container">
+            {/* edits the webpage title */}
             <Helmet>
                 <title>HobbyT - login or sign up</title>
             </Helmet>
