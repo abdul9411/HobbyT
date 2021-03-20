@@ -25,8 +25,6 @@ function SignUp({ storeToken }) {
         email: '',
         password: '',
         password2: '',
-        successful: false,
-        validFOrm: true,
         errors: {
             username: '',
             email: '',
@@ -85,12 +83,6 @@ function SignUp({ storeToken }) {
         event.preventDefault();
 
         const valid = validateForm(values.errors);
-        setValues(preValues => {
-            return {
-                ...preValues,
-                validFOrm: valid
-            }
-        })
         if (valid) {
             axios.post('http://localhost:3001/api/auth/register',
                 {
@@ -98,20 +90,12 @@ function SignUp({ storeToken }) {
                     password: values.password
                 }).then(
                     response => {
-                        setValues(preValues => {
-                            return {
-                                ...preValues,
-                                successful: true
-                            }
-                        })
                         storeToken(response);
                     },
                     error => {
                         setValues(preValues => {
                             return ({
                                 ...preValues,
-                                successful: false,
-                                validFOrm: false,
                                 errors: {
                                     DuplicateUser: 'Username already exists, Please enter a new username'
                                 }

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import Login from "./components/login/login";
+import Login from "./components/login/Login";
 import SignUp from "./components/signup/Signup";
 
 function App() {
@@ -23,16 +23,16 @@ function App() {
     <Router>
       <Switch>
         <Route path="/signup">
-          <SignUp storeToken={storeToken} />
+          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : alert('logged in')}
         </Route>
         <Route path="/">
-          {!cookies.get('user') ? <Login /> : alert('logged in')}
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : alert('logged in')}
         </Route>
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/feed">
-          {!cookies.get('user') ? <Login /> : alert('logged in')}
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : alert('logged in')}
         </Route>
       </Switch>
     </Router>
