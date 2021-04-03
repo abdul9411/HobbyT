@@ -14,6 +14,9 @@ const config = require("config");
 //import authRoutes from './routes/api/auth';
 const authRoutes = require("./routes/api/auth");
 const commRoutes = require("./routes/api/community");
+const postRoutes = require("./routes/api/post");
+const commentRoutes = require("./routes/api/comment");
+const likepostRoutes = require("./routes/api/likepost");
 
 const app = express();
 app.use(bodyParser.json());
@@ -31,6 +34,9 @@ mongoose
 // Use Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/community', commRoutes);
+app.use('/api/post', postRoutes);
+app.use('/api/comment', commentRoutes);
+app.use('/api/likepost', likepostRoutes);
 app.use(bodyParser.xml());
 
 const port = process.env.PORT || 3001;
