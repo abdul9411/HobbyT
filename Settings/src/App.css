@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300&family=Ubuntu:wght@300&display=swap');
+
+.App {
+  text-align: center;font-family: 'Ubuntu', sans-serif;
+}
+
+.togg {
+  display:flex; flex-direction:row;
+  scale: 0.5;font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+.title {
+  
+  padding-left: 50px;font-family: 'Ubuntu', sans-serif;
+}
+
+.cpp {
+  padding-left: 50px;font-family: 'Ubuntu', sans-serif;
+}
+
+.customize-profile {
+  padding-left: 70px;font-family: 'Ubuntu', sans-serif;
+}
+
+.soc {
+  padding-left: 50px;font-family: 'Ubuntu', sans-serif;
+}
+
+.social {
+  padding-left: 70px;font-family: 'Ubuntu', sans-serif;
+}
+
+.ps {
+  padding-left: 50px;font-family: 'Ubuntu', sans-serif;
+}
+
+.pns {
+  padding-left: 70px;font-family: 'Ubuntu', sans-serif;
+}
+
+.del {
+  color: red;font-family: 'Ubuntu', sans-serif;
+}
+
+.testImage {
+  display: block;
+    align-items: center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+   border-radius: 50%;
+}

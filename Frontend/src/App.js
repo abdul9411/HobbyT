@@ -1,67 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
-import axios from 'axios';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Cookies from 'universal-cookie';
 
-import Login from "./components/login/login";
-import SignUp from "./components/signup/signup";
-
-const MySwal = withReactContent(Swal)
+import Login from "./components/login/Login";
+import SignUp from "./components/signup/Signup";
 
 function App() {
+  const cookies = new Cookies();
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-
-  function submitForm(values) {
-    setIsSubmitted(true);
-    if (!isSubmitted) {
-      // send user information to server to store it if there are no errors
-      axios.post('http://localhost:3001/api/auth/register',
-        {
-          name: values.username,
-          password: values.password
-        })
-        // if registration is successful, display success message and redirect to login page
-        .then(function (response) {
-          MySwal.fire({
-            icon: 'success',
-            title: 'Account created successfully',
-            didClose: () => {
-              window.location = '/login';
-            }
-          })
-        })
-        // if there is an error, display an error message and redirect to signup page
-        .catch(function (error) {
-          MySwal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Username already taken',
-            didClose: () => {
-              window.location = '/signup';
-            }
-          })
-        })
-    }
+  // Creates cookie after user signs up so that he can access the user restricted pages
+  function storeToken(res) {
+    cookies.set('user', res.data, { path: '/' });
+    window.location.href = '/feed';
   }
 
+  // router to determine what page to display based on the URL
   return (
     <Router>
       <Switch>
         <Route path="/signup">
-          {!isSubmitted ? <SignUp submitForm={submitForm} /> : null}
+          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : alert('logged in')}
         </Route>
-        <Route exact path="/">
-          <Login />
+        <Route path="/">
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : alert('logged in')}
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/feed">
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : alert('logged in')}
         </Route>
       </Switch>
     </Router>
