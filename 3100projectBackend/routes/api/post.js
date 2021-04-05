@@ -61,10 +61,10 @@ router.post("/", auth, async (req, res)=> {
 router.patch("/", auth, async (req, res)=> {
   try {
     const {post_id, user_id, community_id, title, content} = req.body;
-    if (!post_id || !user_id || !community_id || !title || !content) {
+    if (!post_id || !user_id || !community_id || !title || !title) {
       return res.status(400).json({ msg: 'Please enter all fields' });
     }
-    Post.update({post_id}, {$set: {user_id, community_id, title, content}}).exec(function(err, result){
+    Post.update({post_id}, {$set: {user_id, community_id, title}}).exec(function(err, result){
       if (result.n == 0) return res.status(400).json({msg: "post does not exist"});
       res.status(200).json(result);
     });

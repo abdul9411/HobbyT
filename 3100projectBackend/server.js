@@ -17,6 +17,7 @@ const commRoutes = require("./routes/api/community");
 const postRoutes = require("./routes/api/post");
 const commentRoutes = require("./routes/api/comment");
 const likepostRoutes = require("./routes/api/likepost");
+const messageRoutes = require("./routes/api/message");
 
 const app = express();
 app.use(bodyParser.json());
@@ -37,7 +38,11 @@ app.use('/api/community', commRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/likepost', likepostRoutes);
+app.use('/api/message', messageRoutes);
 app.use(bodyParser.xml());
 
 const port = process.env.PORT || 3001;
-app.listen(port,'0.0.0.0', () => console.log(`Server started on port ${port}`));
+const server = app.listen(port,'0.0.0.0', () => console.log(`Server started on port ${port}`));
+const io = require('socket.io')(server);
+
+app.set('socketio', io);
