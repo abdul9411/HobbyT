@@ -18,8 +18,8 @@ function LogIn({ storeToken }) {
         error: ''
     });
 
-    // send post request to server and returns a messsage error if username and password does not match 
-    // Otherwise creates a cookie and goes to the home page 
+    // send post request to server and returns a messsage error if username and password does not match
+    // Otherwise creates a cookie and goes to the home page
     function handleSubmit(event) {
 
         event.preventDefault();
@@ -58,24 +58,19 @@ function LogIn({ storeToken }) {
         <div className="container">
             {/* edits the webpage title */}
             <Helmet>
-                <title>HobbyT - login or sign up</title>
-            </Helmet>
+                <title>HobbyT - login or sign up</title><
+/Helmet>
             <div className="row justify-content-start">
                 {/* Left container  */}
                 <div className="col-6">
                     <div className="left-container">
                         <img src={logo} alt="HobbyT logo" />
 
-                        <h1>HobbyT</h1>
+                        <h1 className="form-header">HobbyT</h1>
                         {/* Description */}
 
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <p className="form-paragraph">
+                            HobbyT allows you to express your opinions and views in a safe and anonymous manner.
                     </p>
                     </div>
                 </div>
