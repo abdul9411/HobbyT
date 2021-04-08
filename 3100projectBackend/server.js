@@ -18,6 +18,7 @@ const postRoutes = require("./routes/api/post");
 const commentRoutes = require("./routes/api/comment");
 const likepostRoutes = require("./routes/api/likepost");
 const messageRoutes = require("./routes/api/message");
+const communityuserRoutes = require("./routes/api/communityuser");
 
 const app = express();
 app.use(bodyParser.json());
@@ -39,6 +40,7 @@ app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/likepost', likepostRoutes);
 app.use('/api/message', messageRoutes);
+app.use('/api/communityuser', communityuserRoutes);
 app.use(bodyParser.xml());
 
 const port = process.env.PORT || 3001;
