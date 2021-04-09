@@ -20,6 +20,7 @@ const likepostRoutes = require("./routes/api/likepost");
 const messageRoutes = require("./routes/api/message");
 const communityuserRoutes = require("./routes/api/communityuser");
 const notificationRoutes = require("./routes/api/notification");
+const blockuserRoutes = require("./routes/api/blockuser");
 
 const app = express();
 app.use(bodyParser.json());
@@ -43,6 +44,7 @@ app.use('/api/likepost', likepostRoutes);
 app.use('/api/message', messageRoutes);
 app.use('/api/communityuser', communityuserRoutes);
 app.use('/api/notification', notificationRoutes);
+app.use('/api/blockuser', blockuserRoutes);
 app.use(bodyParser.xml());
 
 const port = process.env.PORT || 3001;

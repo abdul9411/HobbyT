@@ -152,4 +152,43 @@ router.get('/user', auth, async (req, res) => {
   }
 });
 
+
+/**
+ * @route   PATCH api/user
+ * @desc    perform username update
+ */
+
+router.patch("/user", auth, async (req, res)=> {
+  try {
+    const {name,  user_id} = req.body;
+    if (!name || !user_id) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+    }
+    User.update({user_id}, {$set: {user_id, name}}).exec(function(err, result){
+      if (result.n == 0) return res.status(400).json({msg: "comment does not exist"});
+      res.status(200).json(result);
+    });
+  }
+  catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+});
+
+
+/**
+ * @route   GET api/auth/user/all
+ * @desc    Get user data
+ */
+
+router.get("/user/all", auth, async (req, res)=> {
+  try {
+    const results = await User.find({});
+    if(!results) throw Error('No comment exist');
+    res.status(200).json(results);
+  }
+  catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
 module.exports = router;
