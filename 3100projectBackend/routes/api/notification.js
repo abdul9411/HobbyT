@@ -30,15 +30,16 @@ router.post("/", auth, async (req, res)=> {
   if (notification1) {
     notificationId = notification1.notification_id + 1;
   }
-  const {title, user_id, content} = req.body;
-  if (!title || !user_id || !content ) {
+  const {title, sender_user_id,receiver_user_id, content} = req.body;
+  if (!title || !sender_user_id || !receiver_user_id || !content ) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
   try {
     const newNotification = new Notification({
       notification_id: notificationId,
       title,
-      user_id,
+      sender_user_id,
+      receiver_user_id,
       content
     });
     const savedNotification = await newNotification.save();

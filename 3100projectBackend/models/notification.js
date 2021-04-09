@@ -7,7 +7,11 @@ const NotificationSchema  = new Schema({
     required: true,
     unique: true
   },
-	user_id: {
+	sender_user_id: {
+    type: Number,
+    required: true
+  },
+	receiver_user_id: {
     type: Number,
     required: true
   },
