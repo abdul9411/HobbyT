@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Homefeedheader from '../Templates/Homefeedheader'
 import { Button } from '@material-ui/core';
 import Posts from '../Templates/Posts'
-import templates from '../post-templates'
+
 
 function Profile_data(props) {
     const user_id= props.username
