@@ -1,8 +1,14 @@
-import React from 'react';
+import React , {
+    useState,
+    useEffect
+    
+}from 'react';
 import "./Notification_div.css"
 import Homefeedheader from '../Templates/Homefeedheader.js'
+import axios from 'axios';
 import Notificationcontainer from './Notificationcontainer.js'
-require('dotenv').config()
+require('dotenv').config();
+
 
 function Notification_div(props) {
 const [notifs, setResult]= useState([])

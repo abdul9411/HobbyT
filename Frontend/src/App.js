@@ -54,12 +54,10 @@ function App() {
             {!cookies.get('user') ? <Redirect to="/"/> : <Profile
               user={cookies.get('user')}
             />}
-
           </Route>
           {/* route to notifications */}
           <Route path="/notifications">
             {!cookies.get('user') ? <Redirect to="/"/> : <Notifications />}
-
           </Route>
           {/* route to community */}
           <Route path="/community/:id">
