@@ -59,9 +59,9 @@ function SignUp({
       case 'username':
         values.errors.DuplicateUser = '';
         values.errors.username =
-          value.length < 3 ?
-          'username must be at least 3 characters long!' :
-          '';
+          value.length < 4 ?
+            'username must be at least 4 characters long!' :
+            '';
         break;
       case 'email':
         values.errors.email = !/\S+@\S+\.\S+/.test(values.email) ?
@@ -71,14 +71,14 @@ function SignUp({
       case 'password':
         values.errors.password =
           value.length < 6 ?
-          'Password must be atleast 6 characters long!' :
-          '';
+            'Password must be atleast 6 characters long!' :
+            '';
         break;
       case 'password2':
         values.errors.password2 =
           value !== values.password ?
-          'Passwords do not match' :
-          '';
+            'Passwords do not match' :
+            '';
         break;
       default:
         break;
@@ -113,110 +113,80 @@ function SignUp({
     }
   }
 
-  return ( < div className = "sform-container" >
+  return (
+    <div className="sform-container">
+      { /* Edits title of the page */}
+      <Helmet >
+        <title>HobbyT - Signup </title>
+      </Helmet>
+      {/* Sign up page contents */}
+      <h2 className="form-header">Create your account </h2>
+      <form method="post" onSubmit={handleSubmit}>
+        <div className="mb-3" >
+          <input className="form-control form-control-lg"
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={
+              values.username
+            }
+            onChange={
+              handleChange
+            }
+            required />
+          {values.errors.username && <p> {values.errors.username}</p>}
+          {values.errors.DuplicateUser && <p> {values.errors.DuplicateUser}</p>}
+        </div>
+        <div className="mb-3">
+          <input
+            className="form-control form-control-lg"
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={
+              values.email
+            }
+            onChange={
+              handleChange
+            }
+            required />
+          {values.errors.email && <p> {values.errors.email}</p>}
+        </div>
+        <div className="mb-3" >
+          <input
+            className="form-control form-control-lg"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={
+              values.password
+            }
+            onChange={
+              handleChange
+            }
+            required />
+          {values.errors.password && <p> {values.errors.password}</p>}
+        </div>
+        <div className="mb-3" >
+          <input
+            className="form-control form-control-lg"
+            type="password"
+            name="password2"
+            placeholder="Confirm password"
+            value={
+              values.password2
+            }
+            onChange={
+              handleChange
+            }
+            required />
+          {values.errors.password2 && <p> {values.errors.password2}</p>}
+        </div>
+        <button type="submit" className="btn btn-primary btn-lg" >Sign up </button>
+      </form>
+      <p> Already a member ? <a href="/login" > Log in </a></p>
+    </div>
+  )
+}
 
-      {
-        /* Edits title of the page */ } <
-      Helmet >
-      <
-      title > HobbyT - Signup < /title> <
-      /Helmet>
-
-      {
-        /* Sign up page contents */ } <
-      h2 className = "form-header" > Create your account < /h2> <
-      form method = "post"
-      onSubmit = {
-        handleSubmit
-      } >
-      <
-      div className = "mb-3" >
-      <
-      input className = "form-control form-control-lg"
-      type = "text"
-      name = "username"
-      placeholder = "Username"
-      value = {
-        values.username
-      }
-      onChange = {
-        handleChange
-      }
-      required /
-      > {
-        values.errors.username && < p > {
-          values.errors.username
-        } < /p>} {
-          values.errors.DuplicateUser && < p > {
-              values.errors.DuplicateUser
-            } < /p>} <
-            /div> <
-            div className = "mb-3" >
-            <
-            input
-          className = "form-control form-control-lg"
-          type = "email"
-          name = "email"
-          placeholder = "Email"
-          value = {
-            values.email
-          }
-          onChange = {
-            handleChange
-          }
-          required
-            /
-            > {
-              values.errors.email && < p > {
-                values.errors.email
-              } < /p>} <
-              /div> <
-              div className = "mb-3" >
-              <
-              input
-              className = "form-control form-control-lg"
-              type = "password"
-              name = "password"
-              placeholder = "Password"
-              value = {
-                values.password
-              }
-              onChange = {
-                handleChange
-              }
-              required /
-              > {
-                values.errors.password && < p > {
-                  values.errors.password
-                } < /p>} <
-                /div> <
-                div className = "mb-3" >
-                <
-                input
-                className = "form-control form-control-lg"
-                type = "password"
-                name = "password2"
-                placeholder = "Confirm password"
-                value = {
-                  values.password2
-                }
-                onChange = {
-                  handleChange
-                }
-                required /
-                > {
-                  values.errors.password2 && < p > {
-                    values.errors.password2
-                  } < /p>} <
-                  /div> <
-                  button type = "submit"
-                  className = "btn btn-primary btn-lg" > Sign up < /button> <
-                  /form> <
-                  p > Already a member ? < a href = "/login" > Log in < /a></p >
-                  <
-                  /div>
-
-                )
-              }
-
-              export default SignUp;
+export default SignUp;

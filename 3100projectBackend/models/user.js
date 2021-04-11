@@ -7,15 +7,11 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
-  name: {
-		type: String,
-		required: true
-	},
+  name:String,
 	password: {type: String,
 		required: true},
 	role: String,
-	email: {type: String,
-		required: true},
+	email: String,
 	picture: String,
 	bio: String
 });

@@ -11,6 +11,8 @@ const PostSchema = new Schema({
     type: Number,
     required: true
   },
+	username: String,
+	avatar: String,
 	community_id: Number,
 	title: String,
 	content: String,
