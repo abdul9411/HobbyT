@@ -120,7 +120,7 @@ router.post('/register', async (req, res) => {
     const savedUser = await newUser.save();
     if (!savedUser) throw Error('saving user error');
 
-    const token = jwt.sign({ user_id: savedUser.user_id , name : savedUser.name }, JWT_SECRET, {expiresIn: 360000});
+    const token = jwt.sign({ user_id: savedUser.user_id , name : savedUser.name , user_object_id: savedUser._id}, JWT_SECRET, {expiresIn: 360000});
 
     res.status(200).json({
       token,
