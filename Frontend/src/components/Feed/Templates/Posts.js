@@ -17,7 +17,8 @@ function Posts({
     image, 
     avatar,
     timestamp,
-    userid
+    userid,
+    likeCount
 }) {
     return (
         <div className="post">
@@ -44,7 +45,7 @@ function Posts({
           <img src={image} alt="" />
           <div className="post__footer">
             
-            <Likebutton likeCount={0}/> 
+            <Likebutton likeCount={likeCount}/> 
             {/* //change here */}
              
             {/* <AddIcon fontSize="small" /> */}
