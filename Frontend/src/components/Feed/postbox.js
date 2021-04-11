@@ -8,8 +8,14 @@ function Postbox(props) {
     function Posttext(event){
         submitPost(event.target.value);
     }
-    function Postme(){
-      alert(postValue)
+
+        function Postme(){
+      axios.post(`$(process.env.REACT_API_URL)/post`, {
+          user_id: props.user.user_id,
+          community_id: props.community_id,
+          title: postValue,
+          content: postValue
+      })
     }
 
     return (
