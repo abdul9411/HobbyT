@@ -30,8 +30,8 @@ router.post("/", auth, async (req, res)=> {
   if (post1) {
     postId = post1.post_id + 1;
   }
-  const {user_id, community_id, title, content} = req.body;
-  if (!user_id || !community_id || !title || !content ) {
+  const {user_id, community_id, username, avatar, title, content} = req.body;
+  if (!user_id || !community_id || !username || !avatar || !title || !content ) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
   try {
@@ -39,6 +39,8 @@ router.post("/", auth, async (req, res)=> {
       post_id: postId,
       user_id,
       community_id,
+      username,
+      avatar,
       title,
       content
     });
@@ -61,10 +63,10 @@ router.post("/", auth, async (req, res)=> {
 router.patch("/", auth, async (req, res)=> {
   try {
     const {post_id, user_id, community_id, title, content} = req.body;
-    if (!post_id || !user_id || !community_id || !title || !title) {
+    if (!post_id || !user_id || !avatar || !username || !community_id || !title || !content) {
       return res.status(400).json({ msg: 'Please enter all fields' });
     }
-    Post.update({post_id}, {$set: {user_id, community_id, title}}).exec(function(err, result){
+    Post.update({post_id}, {$set: {user_id, community_id, title , content}}).exec(function(err, result){
       if (result.n == 0) return res.status(400).json({msg: "post does not exist"});
       res.status(200).json(result);
     });
