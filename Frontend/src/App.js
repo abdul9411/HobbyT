@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
@@ -23,50 +24,46 @@ function App() {
     window.location.href = '/feed';
   }
 
-  function changelocation(props){
-    window.location.href = props;
-  }
   // router to determine what page to display based on the URL
   return (
     <Router>
       <Switch>
         <Route path="/signup">
-          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : changelocation('/feed')}
+          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : <Redirect to="/feed"/>}
         </Route>
-        <Route path="/">
-          {!cookies.get('user') ? changelocation('/login') : changelocation('/feed')}
+        <Route exact path="/">
+          {!cookies.get('user') ? <Redirect to="/login"/> : <Redirect to="/feed"/>}
         </Route>
         <Route path="/login">
-          {!cookies.get('user') ? <Login storeToken={storeToken} /> : changelocation('/feed')}
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Redirect to="/feed"/>}
         </Route>
         <div className="app">
           {/* route to feed */}
           <Route path="/feed">
-            {!cookies.get('user') ? changelocation('/login') : <Homepage
-              user={cookies.get('user')}
+            {!cookies.get('user') ? <Redirect to="/"/> : <Homepage user={cookies.get('user')}
             />}
           </Route>
           {/* route to community list */}
           <Route path="/community">
-            {!cookies.get('user') ? changelocation('/login') : <Community
+            {!cookies.get('user') ? <Redirect to="/"/> : <Community
               user={cookies.get('user')}
             />}
           </Route>
           {/* route to my profile */}
           <Route path="/profile">
-            {!cookies.get('user') ? changelocation('/login') : <Profile
+            {!cookies.get('user') ? <Redirect to="/"/> : <Profile
               user={cookies.get('user')}
             />}
 
           </Route>
           {/* route to notifications */}
           <Route path="/notifications">
-            {!cookies.get('user') ? changelocation('/login') : <Notifications />}
+            {!cookies.get('user') ? <Redirect to="/"/> : <Notifications />}
 
           </Route>
           {/* route to community */}
           <Route path="/community/:id">
-            {!cookies.get('user') ? changelocation('/login') : <Comm_feed_route
+            {!cookies.get('user') ? <Redirect to="/"/> : <Comm_feed_route
               user={cookies.get('user')}
             />}
           </Route>

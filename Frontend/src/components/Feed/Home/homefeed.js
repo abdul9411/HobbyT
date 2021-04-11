@@ -21,7 +21,7 @@ export function CreatePost(Template){
 //gets user cookies as prop
 
 
-function Homefeed({props}){
+function Homefeed(props){
 const userId= props.user.user_id;
 const url = `${process.env.REACT_API_URL}/api/communityuser`
 const [communityID, setID]= useState([])

@@ -6,7 +6,7 @@ import './homepage.css'
 import axios from 'axios'
 
 
-function Homepage({props}) {
+function Homepage(props) {
     return (
         <div className="homepg">
         <Sidebar/>
