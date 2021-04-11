@@ -1,5 +1,6 @@
 import { Avatar, Button, Checkbox } from '@material-ui/core';
 import React, { useState } from 'react';
+import axios from 'axios';
 import "./postbox.css"
 import TextareaAutosize from 'react-textarea-autosize';
 

@@ -58,8 +58,8 @@ function LogIn({ storeToken }) {
         <div className="container">
             {/* edits the webpage title */}
             <Helmet>
-                <title>HobbyT - login or sign up</title><
-/Helmet>
+                <title>HobbyT - login or sign up</title>
+            </Helmet>
             <div className="row justify-content-start">
                 {/* Left container  */}
                 <div className="col-6">
