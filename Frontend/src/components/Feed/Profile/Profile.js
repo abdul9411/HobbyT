@@ -9,10 +9,10 @@ function Profile(props) {
         <div className="profile-container">
         <Sidebar className="sidebar-notif"/>
         <Profile_data
-        icon ={props.picture}
-        displayname= {props.name}
-        username ={props.user_id}
-        bio = {props.bio}
+        icon ={props.user.picture}
+        displayname= {props.user.name}
+        username ={props.user.user_id}
+        bio = {props.user.bio}
         />
         
         </div>
