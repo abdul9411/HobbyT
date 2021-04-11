@@ -2,7 +2,6 @@ import React from 'react';
 import Sidebar from '../Templates/sidebar.js'
 import Widgets from "../widgets.js"
 import Homefeed from './homefeed.js'
-import templates from '../post-templates'
 import './homepage.css'
 import axios from 'axios'
 
