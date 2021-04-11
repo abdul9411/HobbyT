@@ -1,0 +1,14 @@
+.widgets{
+    flex: 0.3;
+    background-color: white;
+    border-left: 4px solid var(--bg-color);
+}
+.widgets1{
+    margin-top: 30px;
+  }
+.top-post{
+  margin: 10px 2px;
+  padding: 3px;
+  border: 1px solid black !important;
+  border-radius: 20px;
+}
