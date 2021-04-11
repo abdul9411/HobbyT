@@ -20,55 +20,57 @@ function App() {
   // Creates cookie after user signs up so that he can access the user restricted pages
   function storeToken(res) {
     cookies.set('user', res.data, { path: '/' });
-    console.log(cookies.get('user'))
     window.location.href = '/feed';
   }
 
+  function changelocation(props){
+    window.location.href = props;
+  }
   // router to determine what page to display based on the URL
   return (
     <Router>
       <Switch>
         <Route path="/signup">
-          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : window.location.href = '/feed'}
+          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : changelocation('/feed')}
         </Route>
         <Route path="/">
-          {!cookies.get('user') ? <Login storeToken={storeToken} /> : window.location.href = '/feed'}
+          {!cookies.get('user') ? changelocation('/login') : changelocation('/feed')}
         </Route>
         <Route path="/login">
-          {!cookies.get('user') ? <Login storeToken={storeToken} /> : window.location.href = '/feed'}
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : changelocation('/feed')}
         </Route>
         <div className="app">
           {/* route to feed */}
           <Route path="/feed">
-            {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Homepage
+            {!cookies.get('user') ? changelocation('/login') : <Homepage
               user={cookies.get('user')}
             />}
           </Route>
           {/* route to community list */}
-          <Route path="/community" exact>
-            {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Community
+          <Route path="/community">
+            {!cookies.get('user') ? changelocation('/login') : <Community
               user={cookies.get('user')}
             />}
           </Route>
           {/* route to my profile */}
           <Route path="/profile">
-            {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Profile
+            {!cookies.get('user') ? changelocation('/login') : <Profile
               user={cookies.get('user')}
             />}
 
           </Route>
           {/* route to notifications */}
           <Route path="/notifications">
-            {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Notifications />}
+            {!cookies.get('user') ? changelocation('/login') : <Notifications />}
 
           </Route>
           {/* route to community */}
           <Route path="/community/:id">
-            {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Comm_feed_route
+            {!cookies.get('user') ? changelocation('/login') : <Comm_feed_route
               user={cookies.get('user')}
             />}
           </Route>
-        </div>
+          </div>
       </Switch>
     </Router>
   );
