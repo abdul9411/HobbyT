@@ -26,7 +26,7 @@ function App() {
       req: res.data
     })
     .then(function (response) {
-      cookies.set('user', response, { path: '/' });
+      cookies.set('user', response.data, { path: '/' });
       window.location.href = '/';
       })
     .catch(function (error) {
