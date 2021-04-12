@@ -5,13 +5,13 @@ import Homefeed from './homefeed.js'
 import './homepage.css'
 import axios from 'axios'
 
-
 function Homepage(props) {
+    console.log(props);
     return (
         <div className="homepg">
         <Sidebar/>
         <Homefeed
-            user = {props.user}
+            user = {props}
         />
         <Widgets/>
         </div>

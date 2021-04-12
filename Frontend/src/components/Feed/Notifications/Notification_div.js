@@ -1,46 +1,41 @@
-import React from 'react';
+import React , {
+    useState,
+    useEffect
+    
+}from 'react';
 import "./Notification_div.css"
 import Homefeedheader from '../Templates/Homefeedheader.js'
+import axios from 'axios';
 import Notificationcontainer from './Notificationcontainer.js'
+require('dotenv').config();
+
+
 function Notification_div(props) {
+const [notifs, setResult]= useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}`,{
+        params: {
+          user_id:props.user.user_id
+        }
+        })
+        .then((response)=>{
+            setResult(response.data)
+        })
+      }, []);
     return (
+     
         <div className="notifdiv">
-           <Homefeedheader
-               name= {props.name}
-           />
-           <Notificationcontainer
-               displayname = "John Doe"
-               action = "liked"
-           />
+        <Homefeedheader
+            name= {props.name}
+        />
+              {notifs.map(
+         item=>(
              <Notificationcontainer
-               displayname = "John Doe"
-               action = "commented on"
-           />
-             <Notificationcontainer
-               displayname = "Margarine"
-               action = "liked"
-               timestamp = "13 April"
-           />
-             <Notificationcontainer
-               displayname = "Margarine"
-               action = "commented on"
-           />
-             <Notificationcontainer
-               displayname = "John Doe"
-               action = "liked"
-           />  <Notificationcontainer
-               displayname = "John Doe"
-               action = "liked"
-           />  <Notificationcontainer
-               displayname = "John Doe"
-               action = "liked"
-           />  <Notificationcontainer
-               displayname = "John Doe"
-               action = "liked"
-           />  <Notificationcontainer
-               displayname = "John Doe"
-               action = "liked"
-           />
+            displayname = {item.title}
+            action = {item.content}
+        />
+         )
+       )}
         </div>
     );
 }

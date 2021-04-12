@@ -64,7 +64,7 @@ function Posts({
           <Collapsible className="comments-tab" trigger="Comments">
           <TextareaAutosize className="comment-box" placeholder="Post your comment"/>
           <Button className="cmnt-pst-btn">Post</Button>
-          <div className="comments"><Avatar/><p>Anna Karenina: comments</p>
+          <div className="comments"><Avatar/>
           </div>
           </Collapsible>
           </div>
