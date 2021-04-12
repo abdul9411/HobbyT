@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import Login from "./components/login/Login";
-import SignUp from "./components/signup/Signup";
+import Login from "./components/login/login";
+import SignUp from "./components/signup/signup";
 import './components/Feed/App.css';
 import Homepage from "./components/Feed/Home/Homepage.js"
 import CommFeedRoute from './components/Feed/Community/Comm_feed_route'
