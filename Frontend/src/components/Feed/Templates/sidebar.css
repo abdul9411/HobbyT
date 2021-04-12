@@ -2,6 +2,10 @@ a:hover{
   color: black;
 }
 
+a{
+  text-decoration: none !important;
+}
+
 .sidebar-hobbyt{
     /* border-right: 1px solid black; */
     background-color: white; 
