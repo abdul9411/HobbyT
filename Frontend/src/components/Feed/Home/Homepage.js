@@ -6,10 +6,9 @@ import './homepage.css'
 import axios from 'axios'
 
 function Homepage(props) {
-    console.log(props);
     return (
         <div className="homepg">
-        <Sidebar/>
+        <Sidebar removeToken={props.removeToken}/>
         <Homefeed
             user = {props}
         />

@@ -5,12 +5,13 @@ import PublicIcon from '@material-ui/icons/Public';
 import ChatIcon from '@material-ui/icons/Chat';
 import GroupIcon from '@material-ui/icons/Group';
 import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import SidebarOption from "./sidebarOptions" 
 import logo from './logo.JPG';
 
 
-function Sidebar(){
+function Sidebar(props){
     return(
         <div className="sidebar-hobbyt">
         {/* <h2>HobbyT</h2> */}
@@ -50,6 +51,12 @@ function Sidebar(){
          Icon= {SettingsOutlinedIcon}
         text="Settings"
     />
+    <a href="/" onClick={props.removeToken()}>
+    <SidebarOption
+        Icon= {ExitToAppIcon}
+        text="Sign out"
+    />
+    </a>
     </a>
     {/* <p className="foot">Copyright© 2021 HobbyT</p> */}
         </div>

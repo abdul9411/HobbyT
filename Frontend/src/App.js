@@ -35,6 +35,11 @@ function App() {
     })   
   }
 
+  function removeToken(){
+    cookies.remove('user');
+    cookies.remove('token');
+  }
+
   // router to determine what page to display based on the URL
   return (
     <Router>
@@ -51,7 +56,7 @@ function App() {
         <div className="app">
           {/* route to feed */}
           <Route path="/feed">
-            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')} token={cookies.get('token')}
+            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')} token={cookies.get('token')} removeToken={removeToken}
             />}
           </Route>
           {/* route to community list */}
