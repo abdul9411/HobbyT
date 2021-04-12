@@ -20,6 +20,37 @@ const auth = require ('../../middleware/auth');
   });
 
   /**
+   * @route   GET api/post/query
+   * @desc    show specific post info
+   */
+
+   router.get("/query", auth, async (req, res)=> {
+      try {
+        if(!req.query.user_id && req.query.community_id){
+          const results = await Post.find({'community_id': req.query.community_id});
+          if(!results) throw Error('No post exist');
+          res.status(200).json(results);
+
+        }else if (req.query.user_id && !req.query.community_id) {
+          const results = await Post.find({"user_id" : req.query.user_id});
+          if(!results) throw Error('No post exist');
+          res.status(200).json(results);
+
+        }else if (req.query.user_id && req.query.community_id) {
+          const results = await Post.find({"user_id" : req.query.user_id ,"community_id": req.query.community_id});
+          if(!results) throw Error('No post exist');
+          res.status(200).json(results);
+        }
+
+        //const results = await Post.find({});
+
+      }
+      catch (e) {
+        res.status(400).json({ msg: e.message });
+      }
+    });
+
+  /**
    * @route   POST api/post
    * @desc    perform post creation
    */
