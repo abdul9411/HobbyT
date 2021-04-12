@@ -22,6 +22,7 @@ function App() {
   // Creates cookie after user signs up so that he can access the user restricted pages
   function storeToken(res) {
     axios.defaults.headers.common['x-auth-token'] = res.data.token;
+    cookies.set('token', res.data.token, { path: '/' });
     axios.get('http://localhost:3001/api/auth/user', {
       req: res.data
     })
@@ -50,19 +51,19 @@ function App() {
         <div className="app">
           {/* route to feed */}
           <Route path="/feed">
-            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')}
+            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')} token={cookies.get('token')}
             />}
           </Route>
           {/* route to community list */}
           <Route path="/community">
             {!cookies.get('user') ? <Redirect to="/" /> : <Community
-              user={cookies.get('user')}
+              user={cookies.get('user')} token={cookies.get('token')}
             />}
           </Route>
           {/* route to my profile */}
           <Route path="/profile">
             {!cookies.get('user') ? <Redirect to="/" /> : <Profile
-              user={cookies.get('user')}
+              user={cookies.get('user')} token={cookies.get('token')}
             />}
           </Route>
           {/* route to notifications */}
@@ -71,7 +72,7 @@ function App() {
           </Route>
           {/* route to community */}
           <Route path="/community/:id">
-            {!cookies.get('user') ? <Redirect to="/" /> : <CommFeedRoute user={cookies.get('user')} />}
+            {!cookies.get('user') ? <Redirect to="/" /> : <CommFeedRoute user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
         </div>
       </Switch>
