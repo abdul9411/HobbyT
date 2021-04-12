@@ -11,17 +11,27 @@ import Login from "./components/login/Login";
 import SignUp from "./components/signup/Signup";
 import './components/Feed/App.css';
 import Homepage from "./components/Feed/Home/Homepage.js"
-import Comm_feed_route from './components/Feed/Community/Comm_feed_route'
+import CommFeedRoute from './components/Feed/Community/Comm_feed_route'
 import Community from './components/Feed/Community/Community.js'
 import Notifications from './components/Feed/Notifications/Notifications.js'
 import Profile from './components/Feed/Profile/Profile.js'
+import axios from 'axios';
 
 function App() {
   const cookies = new Cookies();
   // Creates cookie after user signs up so that he can access the user restricted pages
   function storeToken(res) {
-    cookies.set('user', res.data, { path: '/' });
-    window.location.href = '/feed';
+    axios.defaults.headers.common['x-auth-token'] = res.data.token;
+    axios.get('http://localhost:3001/api/auth/user', {
+      req: res.data
+    })
+    .then(function (response) {
+      cookies.set('user', response, { path: '/' });
+      window.location.href = '/';
+      })
+    .catch(function (error) {
+      console.log(error);
+    })   
   }
 
   // router to determine what page to display based on the URL
@@ -29,43 +39,41 @@ function App() {
     <Router>
       <Switch>
         <Route path="/signup">
-          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : <Redirect to="/feed"/>}
+          {!cookies.get('user') ? <SignUp storeToken={storeToken} /> : <Redirect to="/feed" />}
         </Route>
         <Route exact path="/">
-          {!cookies.get('user') ? <Redirect to="/login"/> : <Redirect to="/feed"/>}
+          {!cookies.get('user') ? <Redirect to="/login" /> : <Redirect to="/feed" />}
         </Route>
         <Route path="/login">
-          {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Redirect to="/feed"/>}
+          {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Redirect to="/feed" />}
         </Route>
         <div className="app">
           {/* route to feed */}
           <Route path="/feed">
-            {!cookies.get('user') ? <Redirect to="/"/> : <Homepage user={cookies.get('user')}
+            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')}
             />}
           </Route>
           {/* route to community list */}
           <Route path="/community">
-            {!cookies.get('user') ? <Redirect to="/"/> : <Community
+            {!cookies.get('user') ? <Redirect to="/" /> : <Community
               user={cookies.get('user')}
             />}
           </Route>
           {/* route to my profile */}
           <Route path="/profile">
-            {!cookies.get('user') ? <Redirect to="/"/> : <Profile
+            {!cookies.get('user') ? <Redirect to="/" /> : <Profile
               user={cookies.get('user')}
             />}
           </Route>
           {/* route to notifications */}
           <Route path="/notifications">
-            {!cookies.get('user') ? <Redirect to="/"/> : <Notifications />}
+            {!cookies.get('user') ? <Redirect to="/" /> : <Notifications />}
           </Route>
           {/* route to community */}
           <Route path="/community/:id">
-            {!cookies.get('user') ? <Redirect to="/"/> : <Comm_feed_route
-              user={cookies.get('user')}
-            />}
+            {!cookies.get('user') ? <Redirect to="/" /> : <CommFeedRoute user={cookies.get('user')} />}
           </Route>
-          </div>
+        </div>
       </Switch>
     </Router>
   );
