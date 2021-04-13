@@ -5,15 +5,15 @@ const LikePostSchema = new Schema({
 	likepost_id: {
     type: Number,
     required: true,
+    unique: true
   },
 	post_id: {
     type: Number,
-    required: true,
-	},
+    required: true
+  },
 	user_id: {
     type: Number,
-    required: true,
-    unique: true
+    required: true
   },
 });
 
