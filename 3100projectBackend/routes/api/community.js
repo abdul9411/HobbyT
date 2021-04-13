@@ -124,26 +124,6 @@ router.delete("/", auth, async (req,res)=> {
   }
 });
 
-/**
- * @route   DELETE api/comment/post
- * @desc    perform deletion of all comments of a post
- */
-
- router.delete("/post", auth, async (req,res)=> {
-  try {
-    const {post_id} = req.body;
-    if (!post_id) {
-      return res.status(401).json({ msg: 'Please enter all fields' });
-    }
-    Comment.remove({post_id}).exec(function(err, result){
-      if (result.n == 0) return res.status(400).json({msg: "comment does not exist"});
-      res.status(200).json(result);
-    });
-  }
-  catch (e) {
-    res.status(401).json({ error: e.message });
-  }
-});
 
 
 
