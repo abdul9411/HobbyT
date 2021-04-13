@@ -105,4 +105,27 @@ router.delete("/", auth, async (req,res)=> {
 });
 
 
+/**
+ * @route   DELETE api/likepost/post
+ * @desc    perform deletion of all likes on a post
+ */
+
+ router.delete("/post", async (req,res)=> {
+  try {
+    const {post_id} = req.body;
+    if (!post_id) {
+      return res.status(401).json({ msg: 'Please enter all fields' });
+    }
+    LikePost.remove({post_id}).exec(function(err, result){
+      if (result.n == 0) return res.status(400).json({msg: "likepost does not exist"});
+      res.status(200).json(result);
+    });
+  }
+  catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+});
+
+
+
 module.exports = router;
