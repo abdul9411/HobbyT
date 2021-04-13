@@ -47,7 +47,7 @@ function Comments({
        axios.post(`http://localhost:3001/api/notification`,{
         sender_user_id: user_id,
         receiver_user_id: receiverUser,
-        title: "commented on",
+        title: "commented on your post",
         content: postdata
       }).then(console.log('success'))
       .catch((err)=>{console.log(err)})
