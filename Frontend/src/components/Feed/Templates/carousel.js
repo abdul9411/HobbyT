@@ -1,9 +1,6 @@
 import React, { Component } from 'react'  
 import Carousel from 'react-bootstrap/Carousel'  
-export class BootstrapCarousel extends Component {  
-        render() {  
-  
-
+function BootstrapCarousel(props){  
                return (  
 
                         <div>  
@@ -18,12 +15,10 @@ export class BootstrapCarousel extends Component {
 
                          className="d-block w-100"  
 
-                        src={'https://carolinawxauthority.com/wp-content/uploads/2017/07/northern_lights_lyngenfjord_northern_norway_nav_d3ffe4a3-bde9-4ffa-8a1c-a42b84c60681.jpg'}  />  
+                        src={'https://www.fg-a.com/wallpapers/2021-black-random-stones.jpg'}  />  
 
                            <Carousel.Caption>  
-
-                             <h3>Item 1 </h3>  
-
+                           <h1>HobbyT is looking for advertisements</h1>
                                  </Carousel.Caption>  
 
                                  </Carousel.Item  >  
@@ -34,11 +29,10 @@ export class BootstrapCarousel extends Component {
 
                                    className="d-block w-100"  
 
-                                    src={"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"}    />  
+                                    src={"https://www.fg-a.com/wallpapers/2021-black-random-stones.jpg"}    />  
 
                                        <Carousel.Caption>  
-
-                                   <h3>Item 2</h3>  
+                                   <h3>Stay connected and Anonymous with HobbyT</h3>  
 
                                       </Carousel.Caption>  
 
@@ -50,10 +44,11 @@ export class BootstrapCarousel extends Component {
 
                                         className="d-block w-100"  
 
-                                         src={"https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"}   />  
+                                         src={"https://www.fg-a.com/wallpapers/2021-black-random-stones.jpg"}   />  
 
                                         <Carousel.Caption>  
-                                          <h3> Item 3</h3>  
+                                          <h3> #BlackLivesMatter</h3>
+                                          <p>HobbyT stands for justice, freedom and racial equality</p>  
 
                                           </Carousel.Caption>  
 
@@ -69,6 +64,5 @@ export class BootstrapCarousel extends Component {
 
         }  
 
-}  
 
 export default BootstrapCarousel  
