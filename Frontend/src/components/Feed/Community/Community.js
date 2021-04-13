@@ -10,6 +10,7 @@ function Community(props) {
         <Community_container
             name="Community"
             user = {props.user}
+            token = {props.token}
         />
 
         </div>
