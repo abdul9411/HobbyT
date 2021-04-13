@@ -5,6 +5,10 @@ import Posts from '../Templates/Posts.js'
 import Homefeedheader from '../Templates/Homefeedheader.js'
 require('dotenv').config()
 
+//Problem: posts render only for one community
+
+
+
 export function CreatePost(Template){
     return(
         <Posts
@@ -18,36 +22,55 @@ export function CreatePost(Template){
 };
 
 
-//gets user cookies as prop
 
 
 function Homefeed(props){
 const userId= props.user.user_id;
-const url = `${process.env.REACT_API_URL}/api/communityuser`
+const url = `http://localhost:3001/api/communityuser/query`
 const [communityID, setID]= useState([])
     useEffect(() => {
+    axios.defaults.headers.common['x-auth-token'] = props.token;
     axios.get(url,{
     params: {
-      user_id:userId
+      user_id:userId,
     }
     })
     .then((response)=>{
       setID(response.data)
-      // axios returns API response body in .data
+    })
+    .catch((err)=>{
+      console.log(err)
     })
   }, []);
+
+
   const [posts, setPosts]= useState([])
-  useEffect(() => {
-    axios.get(`${process.env.REACT_API_URL}/api/post`,{
+  const[param, change]=useState([])
+
+  useEffect(() => { 
+   
+    console.log(param)
+    for (var i = 0; i < communityID.length; i++) {
+    axios.defaults.headers.common['x-auth-token'] = props.token;  
+    axios.get(`http://localhost:3001/api/post/query`,{
     params: {
-      community_id: communityID
+      community_id: [1,2,3]
     }
     })
     .then((response)=>{
-      setID(response.data)
-      // axios returns API response body in .data
+      // response.data.length!==0&&setPosts(posts => [...posts, response.data]);
+      // console.log(response) 
+      // console.log("e")
+      setPosts(response.data)
+
     })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
   }, [communityID]);
+
+  console.log(posts)
 return(
     
 <div className="homefeed">
@@ -58,7 +81,20 @@ return(
   <div className="feedheadhome"></div>
     {/* {post box} */}
     {/* {posts} */}
-    {posts.map(CreatePost)}
+    {posts.map(
+            item=>(
+              <Posts
+                username= {item.user_id}
+                displayName = {item.username}
+                text = {item.content} 
+                avatar = {props.icon}
+                timestamp = {item.date}
+                userid = {userId}
+                post_id = {item.post_id}
+                likeCount= {item.likes}
+              />
+            )
+          )}
     <p className="endnote">Nothing more to show right now</p>
 </div>
 );
