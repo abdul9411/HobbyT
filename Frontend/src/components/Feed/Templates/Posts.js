@@ -1,14 +1,11 @@
 import { Avatar, Icon } from '@material-ui/core';
 import React from 'react';
 import "./Posts.css"
-import TextareaAutosize from 'react-textarea-autosize';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
-import SentimentDissatisfiedOutlinedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Collapsible from 'react-collapsible'
+import Comments from './Comments'
 import Likebutton from './Likebutton.js'
-import { Button } from '@material-ui/core';
 
 function Posts({
     username,
@@ -18,8 +15,10 @@ function Posts({
     avatar,
     timestamp,
     userid,
-    likeCount
+    likeCount,
+    post_id
 }) {
+ 
     return (
         <div className="post">
         <div className="post__avatar">
@@ -45,28 +44,29 @@ function Posts({
           <img src={image} alt="" />
           <div className="post__footer">
             
-            <Likebutton likeCount={likeCount}/> 
+            <Likebutton 
+            post_id = {post_id}
+            user_id = {userid}
+            likeCount={likeCount}/> 
             {/* //change here */}
              
             {/* <AddIcon fontSize="small" /> */}
             <div class="dropdown-container" tabindex="-1">
             <div class="three-dots"></div>
             <div class="dropdown">
-            {username!==userid&& <a href="#"><div><NotInterestedIcon fontSize="small"/>  Report User</div></a>}
-            {username!==userid&& <a href="#"><div><FlagOutlinedIcon fontSize="small"/>  Report Post</div></a>}
-            {username===userid&& <a href="#"><div><DeleteIcon fontSize="small"/>  Delete</div></a>}
+            {username!==userid&& <a href="/report"><div><NotInterestedIcon fontSize="small"/>  Report User</div></a>}
+            {username!==userid&& <a href="/report"><div><FlagOutlinedIcon fontSize="small"/>  Report Post</div></a>}
+            {username===userid&& <a href="/deletepost"><div><DeleteIcon fontSize="small"/>  Delete</div></a>}
             </div>
             </div>
             {/* <MoreHorizIcon fontSize="small" /> */}
          
           </div>
           <div >
-          <Collapsible className="comments-tab" trigger="Comments">
-          <TextareaAutosize className="comment-box" placeholder="Post your comment"/>
-          <Button className="cmnt-pst-btn">Post</Button>
-          <div className="comments"><Avatar/>
-          </div>
-          </Collapsible>
+           <Comments
+             user_id= {userid}
+             post_id = {post_id}
+           />
           </div>
         </div>
       </div>
