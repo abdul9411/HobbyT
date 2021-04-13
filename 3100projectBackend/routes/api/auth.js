@@ -196,7 +196,7 @@ router.get("/user/all", auth, async (req, res)=> {
  * @desc    perform bio update
  */
 
-router.patch("/user/bio", async (req, res)=> {
+router.patch("/user/bio", auth, async (req, res)=> {
   try {
     const {bio,  user_id} = req.body;
     if (!bio || !user_id) {
