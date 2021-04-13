@@ -11,7 +11,20 @@ function Comments({
     user_id,
     post_id
 }) {
-
+    const[receiverUser, updateReceiveruser]=useState(0)
+    const[postdata, updatepostdata]=useState("")
+    useEffect(() => {
+        axios.get(`http://localhost:3001/api/post/postid`,{
+        params: {
+          post_id: post_id
+        }
+        })
+        .then((response)=>{
+          updateReceiveruser(response.data[0].user_id)
+          updatepostdata(response.data[0].content)
+        })
+      }, []);
+  
 
     const [postValue, submitPost]= useState("")
     function Posttext(event){
@@ -25,11 +38,19 @@ function Comments({
            comment: postValue
        })
        .then((response)=>
-          submitPost("")
+          submitPost(""),
+          
        )
        .catch((error)=>{
            console.log(error)
        })
+       axios.post(`http://localhost:3001/api/notification`,{
+        sender_user_id: user_id,
+        receiver_user_id: receiverUser,
+        title: "commented on",
+        content: postdata
+      }).then(console.log('success'))
+      .catch((err)=>{console.log(err)})
     }
 
     const [comments, updatecomments]= useState([])
@@ -58,6 +79,7 @@ function Comments({
                 comment= {item.comment}
                 userID = {item.user_id}
                 myID= {user_id}
+                commentID= {item.comment_id}
                 />
             )
           )}
