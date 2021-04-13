@@ -19,22 +19,29 @@ export function CreatePost(Template){
 }
 
 function Feed(props){
- 
     const [posts, setposts]= useState([])
     const [communityid, setcommunityid] = useState('')
+
     useEffect(() => {
-    axios.get(`${process.env.REACT_API_URL}/community`,{
+    axios.defaults.headers.common['x-auth-token'] = props.token;
+    axios.get(`http://localhost:3001/api/community/query`,{
     params: {
       name: props.Community_name
     }
     })
     .then((response)=>{
-      setcommunityid(response.data.community_id)
+      setcommunityid(response.data[0].community_id)    
+    
+    })
+    .catch((error)=>{
+      console.log(error)
     })
   }, []);
 
+
   useEffect(() => {
-    axios.get(`${process.env.REACT_API_URL}/post`,{
+    axios.defaults.headers.common['x-auth-token'] = props.token;
+    axios.get(`http://localhost:3001/api/post/query`,{
     params: {
         community_id: communityid
     }
@@ -42,9 +49,11 @@ function Feed(props){
     .then((response)=>{
       setposts(response.data)
     })
+    .catch((error)=>{
+      console.log(error)
+    })
   }, [communityid]);
-
-
+  
 return(
     
 <div className="feed">
@@ -53,17 +62,23 @@ return(
       Community_name={props.Community_name}
   />
     {/* {post box} */}
-    <Postbox/>
+    <Postbox
+      user ={props.user}
+      community_id = {communityid}
+      token = {props.token}
+    />
     {/* {posts} */}
     {posts.map(
             item=>(
               <Posts
                 username= {item.user_id}
-                displayName = {item.name}
+                displayName = {item.username}
                 text = {item.content}
                 avatar = {item.avatar}
                 timestamp ={item.date}
                 userid = {props.user.user_id}
+                post_id = {item.post_id}
+                likeCount = {item.likes}
               />
             )
           )}
