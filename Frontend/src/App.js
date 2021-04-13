@@ -35,11 +35,12 @@ function App() {
     })   
   }
 
-  function removeToken(){
-    cookies.remove('user');
-    cookies.remove('token');
+  if (window.location.pathname === '/logout'){
+    console.log("signing out");
+    cookies.remove('user', {path: '/'});
+    cookies.remove('token', {path: '/'});
+    window.location.href = '/';
   }
-
   // router to determine what page to display based on the URL
   return (
     <Router>
@@ -53,33 +54,35 @@ function App() {
         <Route path="/login">
           {!cookies.get('user') ? <Login storeToken={storeToken} /> : <Redirect to="/feed" />}
         </Route>
+        <React.Fragment>
         <div className="app">
           {/* route to feed */}
-          <Route path="/feed">
-            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')} token={cookies.get('token')} removeToken={removeToken}
+          <Route exact path="/feed">
+            {!cookies.get('user') ? <Redirect to="/" /> : <Homepage user={cookies.get('user')} token={cookies.get('token')}
             />}
           </Route>
           {/* route to community list */}
-          <Route path="/community">
+          <Route exact path="/community">
             {!cookies.get('user') ? <Redirect to="/" /> : <Community
               user={cookies.get('user')} token={cookies.get('token')}
             />}
           </Route>
           {/* route to my profile */}
-          <Route path="/profile">
+          <Route exact path="/profile">
             {!cookies.get('user') ? <Redirect to="/" /> : <Profile
               user={cookies.get('user')} token={cookies.get('token')}
             />}
           </Route>
           {/* route to notifications */}
-          <Route path="/notifications">
+          <Route exact path="/notifications">
             {!cookies.get('user') ? <Redirect to="/" /> : <Notifications />}
           </Route>
           {/* route to community */}
-          <Route path="/community/:id">
+          <Route exact path="/community/:id">
             {!cookies.get('user') ? <Redirect to="/" /> : <CommFeedRoute user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
         </div>
+        </React.Fragment>
       </Switch>
     </Router>
   );
