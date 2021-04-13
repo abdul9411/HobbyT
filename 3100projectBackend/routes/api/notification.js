@@ -61,7 +61,7 @@ router.post("/", auth, async (req, res)=> {
 
  router.get("/query", auth, async (req, res)=> {
     try {
-        const results = await Notification.find({'receiver_user_id': req.query.receiver_user_id});
+        const results = await Notification.find({'receiver_user_id': req.query.receiver_user_id}).sort({notification_id: -1});
         if(!results) throw Error('No Notifications exist');
         res.status(200).json(results);
     }
