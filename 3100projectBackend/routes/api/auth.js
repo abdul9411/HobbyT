@@ -191,4 +191,21 @@ router.get("/user/all", auth, async (req, res)=> {
   }
 });
 
+/**
+ * @route   GET api/auth/user/query
+ * @desc    show specific post info
+ */
+
+ router.get("/user/query", auth, async (req, res)=> {
+    try {
+        const results = await User.find({'user_id': req.query.user_id});
+        if(!results) throw Error('No user exist');
+        res.status(200).json(results);
+    }
+    catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  });
+
+
 module.exports = router;
