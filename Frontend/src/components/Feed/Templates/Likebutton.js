@@ -8,12 +8,23 @@ import axios from 'axios'
 function Likebutton({post_id, 
     user_id,
     likeCount}) {
+      
     const[likestate, changelikestate]= useState("unliked")
-    // const[posts, changePosts] = useState({})
-
+    const[receiverUser, updateReceiveruser] = useState(0);
     const[nooflikes, changelikeno]= useState(0)
+    const [postdata, updatepostdata]=useState("")
 
-
+    useEffect(() => {
+      axios.get(`http://localhost:3001/api/post/postid`,{
+      params: {
+        post_id: post_id
+      }
+      })
+      .then((response)=>{
+        updateReceiveruser(response.data[0].user_id)
+        updatepostdata(response.data[0].content)
+      })
+    }, []);
     
     useEffect(() => {
         axios.get(`http://localhost:3001/api/likepost/query`,{
@@ -24,7 +35,7 @@ function Likebutton({post_id,
         })
         .then((response)=>{
           response.data.length!==0&&changelikestate("liked")
-        })
+        }).catch((err)=>{console.log(err)})
       }, [post_id, likestate]);
      
       useEffect(() => {
@@ -66,6 +77,13 @@ const[likepostid, changelikepostid]= useState(0)
                     user_id: user_id,
                     post_id: post_id
                   }).then(changelikeno(nooflikes+1), changelikestate("liked")).catch((error)=>console.log(error))
+            axios.post(`http://localhost:3001/api/notification`,{
+              sender_user_id: user_id,
+              receiver_user_id: receiverUser,
+              title: "liked",
+              content: postdata
+            }).then(console.log('success'))
+            .catch((err)=>{console.log(err)})
           }
       }
 
