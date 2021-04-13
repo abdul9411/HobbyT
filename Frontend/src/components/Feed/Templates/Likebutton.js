@@ -72,6 +72,12 @@ const[likepostid, changelikepostid]= useState(0)
                       changelikestate("unliked")
                 }, 
                  ) .catch((error)=>console.log(error))
+          axios.patch(`http://localhost:3001/api/post/like`,{
+            
+              post_id: post_id,
+              likes: nooflikes-1
+         
+          }).then((res)=>{console.log(res)}).catch((e)=>console.log(e))
           }else if (likestate==="unliked"){
             axios.post(`http://localhost:3001/api/likepost`,{
                     user_id: user_id,
@@ -80,11 +86,18 @@ const[likepostid, changelikepostid]= useState(0)
             axios.post(`http://localhost:3001/api/notification`,{
               sender_user_id: user_id,
               receiver_user_id: receiverUser,
-              title: "liked",
+              title: "liked your post",
               content: postdata
             }).then(console.log('success'))
             .catch((err)=>{console.log(err)})
+            axios.patch(`http://localhost:3001/api/post/like`,{
+                post_id: post_id,
+                likes: nooflikes+1
+  
+            }).then((res)=>{console.log(res)}).catch((e)=>console.log(e))
+          
           }
+
       }
 
     return (
