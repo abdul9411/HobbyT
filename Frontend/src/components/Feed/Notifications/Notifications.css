@@ -6,4 +6,16 @@
     max-width: 1350px;
     padding: 0 10px;
   
+  
+}
+.feedHeader{
+    flex:0.5;
+    background-color: white;
+}
+.padding{
+    flex: 0.03;
+    background-color: white; 
+}
+.endnote{
+    text-align: center;
 }
