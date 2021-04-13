@@ -1,6 +1,6 @@
 import './Profile_data.css'
 import axios from 'axios'
-import { Avatar } from '@material-ui/core';
+import Avatar from 'react-avatar';
 import React, { useState, useEffect } from 'react';
 import Homefeedheader from '../Templates/Homefeedheader'
 import { Button } from '@material-ui/core';
@@ -53,12 +53,11 @@ function textme(event){
            />
            <div className="prof-desc">
            {/* need to adjust size */}
-            <Avatar src={props.icon} className="prof-pic"/>
+            <Avatar color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue'])} round={true} name={props.displayname} className="prof-pic"/>
             <div className="dp-name">{props.displayname} (@{props.username})</div>
             <div className= "bio">{mybio}</div>
             {console.log(props.bio)}
             <Collapsible trigger= "Edit Profile">
-            <Button>Add Profile Photo</Button>
             <TextareaAutosize maxlength='200' className= "bio-holder" placeholder="Tell us about your hobbies"
             value = {bioval} onChange={textme}
             />
