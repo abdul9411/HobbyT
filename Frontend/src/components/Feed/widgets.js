@@ -1,16 +1,41 @@
 // import { Widgets } from "@material-ui/icons";
-import React from "react";
+import React,{useEffect, useState} from "react";
 import "./widgets.css";
 import BootstrapCarousel from './Templates/carousel'
-// const data = Exporting()
+import axios from "axios";
+import Avatar from 'react-avatar'
 function Community(){
+  const[post, upd]=useState({})
+  const[usern, updateusrn]=useState(0)
+  useEffect(()=>{
+    axios.get(`http://localhost:3001/api/post/likesort`)
+    .then((response)=>{
+      upd(response.data[0])
+    })
+  },[])
+  useEffect(()=>{
+    axios.get(`http://localhost:3001/api/auth/user/all`)
+    .then((response)=>{
+      updateusrn(response.data.length)
+    })
+  },[])
     return(
+
       <div className= "widgets">
+      <div className="user-number">{usern} users and growing!</div>
         <div className="top-post">
-          <h2>Top Post</h2>
+          <div className="head">Top Post</div>
+          <Avatar name={post.username} round={true} size = "40" color={Avatar.getRandomColor( ['red', 'green'])}/> <span className="dpname">{post.username}</span> 
+          <span className="user-id"> @({post.user_id})</span>
+          <div className="date">posted on {post.date}</div>
+          <h3>{post.content}</h3>
+          <p>{post.likes} likes</p>
           </div>
+
+
+
         <div className="widgets1">
-   <BootstrapCarousel slideshowSpeed></BootstrapCarousel>  
+   <BootstrapCarousel ></BootstrapCarousel>  
         </div>
         </div>
     );
