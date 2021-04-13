@@ -11,7 +11,6 @@ function Communityfeed(props) {
     <Sidebar/>
     <Feed
         Community_name= {props.Community_name}
-        templates= {phy_templates}
     />
     <Widgets/>
     </div>
