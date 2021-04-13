@@ -192,6 +192,28 @@ router.get("/user/all", auth, async (req, res)=> {
 });
 
 /**
+ * @route   PATCH api/auth/user/bio
+ * @desc    perform bio update
+ */
+
+router.patch("/user/bio", async (req, res)=> {
+  try {
+    const {bio,  user_id} = req.body;
+    if (!bio || !user_id) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+    }
+    User.update({user_id}, {$set: {user_id, bio}}).exec(function(err, result){
+      if (result.n == 0) return res.status(400).json({msg: "comment does not exist"});
+      res.status(200).json(result);
+    });
+  }
+  catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+});
+
+
+/**
  * @route   GET api/auth/user/query
  * @desc    show specific post info
  */
