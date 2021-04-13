@@ -19,10 +19,9 @@
     border-radius: 20px;
 }
 .prof-pic{
-    position: relative;
-    margin-left: 39%;
-    width: 130px;
-    height: auto;
+    display: flex;
+    align-self: center;
+    margin: auto;
 }
 .dp-name{
     font-weight: 500;
@@ -31,4 +30,20 @@
 .footer-of-profile{
     padding-top: 10px;
     text-align: center;
+}
+.bio{
+    font-family: cursive;
+}
+
+    
+.bio-holder{
+    flex: 1;
+    margin-left: 20px;
+    font-size: 20px;
+    border: none;
+    min-height: fit-content;
+    min-width: fit-content;
+    resize: none;
+    outline: none; 
+    overflow-y: auto;
 }
