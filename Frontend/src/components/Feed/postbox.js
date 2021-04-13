@@ -93,7 +93,7 @@ function Checker(){
             <form method="POST" encType="multipart/form-data">
                 <div className="postbox-in">
                 <Avatar src=""></Avatar>
-                <TextareaAutosize value={postValue} onChange={Posttext} placeholder={"A penny for your thoughts.."}></TextareaAutosize>
+                <TextareaAutosize maxLength ='500' value={postValue} onChange={Posttext} placeholder={"A penny for your thoughts.."}></TextareaAutosize>
                 </div>
                     
                    <div className="posting_prompt">
