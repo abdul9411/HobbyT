@@ -3,18 +3,19 @@ import '../Communityfeed.css';
 import Sidebar from "../Templates/sidebar.js";
 import Feed from "../feed.js";
 import Widgets from "../widgets.js";
-import phy_templates from '../post-templates-physics';
 import {useHistory, useParams} from 'react-router-dom';
 
 
-function Comm_feed_route({match}, props) {
+function Comm_feed_route(props) {
     const {id} =  useParams()
+    console.log({id}, props.token, props.user)
   return (
     <div className="cm-feed">
     <Sidebar/>
     <Feed
         Community_name= {id}
         user = {props.user}
+        token = {props.token}
     />
     <Widgets/>
     </div>
