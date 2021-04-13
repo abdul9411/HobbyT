@@ -19,6 +19,37 @@ const auth = require ('../../middleware/auth');
     }
   });
 
+/**
+   * @route   GET api/likepost/query
+   * @desc    show specific post info
+   */
+
+   router.get("/query",auth, async (req, res)=> {
+      try {
+        if(!req.query.post_id && req.query.user_id){
+          const results = await LikePost.find({'user_id': req.query.user_id});
+          if(!results) throw Error('No likepost exist');
+          res.status(200).json(results);
+
+        }else if (req.query.post_id && !req.query.user_id) {
+          const results = await LikePost.find({"post_id" : req.query.post_id});
+          if(!results) throw Error('No likepost exist');
+          res.status(200).json(results);
+
+        }else if (req.query.user_id && req.query.post_id) {
+          const results = await LikePost.find({"user_id" : req.query.user_id ,"post_id": req.query.post_id});
+          if(!results) throw Error('No likepost exist');
+          res.status(200).json(results);
+        }
+
+      }
+      catch (e) {
+        res.status(400).json({ msg: e.message });
+      }
+    });
+
+
+
   /**
    * @route   POST api/likepost
    * @desc    perform likepost creation
