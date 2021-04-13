@@ -5,9 +5,6 @@ import Posts from '../Templates/Posts.js'
 import Homefeedheader from '../Templates/Homefeedheader.js'
 require('dotenv').config()
 
-//Problem: posts render only for one community
-
-
 
 export function CreatePost(Template){
     return(
@@ -46,28 +43,26 @@ const [communityID, setID]= useState([])
 
   const [posts, setPosts]= useState([])
   const[param, change]=useState([])
-
+  const[a, set] = useState([])
   useEffect(() => { 
-   
-    console.log(param)
+    let data = a
     for (var i = 0; i < communityID.length; i++) {
-    axios.defaults.headers.common['x-auth-token'] = props.token;  
+      data.push(communityID[i].community_id)
+          }     
+      axios.defaults.headers.common['x-auth-token'] = props.token;  
     axios.get(`http://localhost:3001/api/post/query`,{
     params: {
-      community_id: [1,2,3]
+      community_id: data
     }
     })
     .then((response)=>{
-      // response.data.length!==0&&setPosts(posts => [...posts, response.data]);
-      // console.log(response) 
-      // console.log("e")
       setPosts(response.data)
 
     })
     .catch((err)=>{
       console.log(err)
     })
-  }
+
   }, [communityID]);
 
   console.log(posts)
