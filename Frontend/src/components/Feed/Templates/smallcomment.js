@@ -13,8 +13,6 @@ function Smallcomment({
 
     const[commentexists, commentdelete] = useState(true)
     function deletecomment(){
-        console.log("entet")
-        console.log(commentID)
         axios.delete(`http://localhost:3001/api/comment`, {
             data: {
                 comment_id: commentID
