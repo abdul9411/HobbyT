@@ -19,6 +19,37 @@ const auth = require ('../../middleware/auth');
     }
   });
 
+/**
+ * @route   GET api/comment/query
+ * @desc    show specific post info
+ */
+
+ router.get("/query", auth, async (req, res)=> {
+    try {
+      if(!req.query.post_id && req.query.comment_id){
+        const results = await Comment.find({'comment_id': req.query.comment_id});
+        if(!results) throw Error('No comment exist');
+        res.status(200).json(results);
+
+      }else if (req.query.post_id && !req.query.comment_id) {
+        const results = await Comment.find({"post_id" : req.query.post_id});
+        if(!results) throw Error('No comment exist');
+        res.status(200).json(results);
+
+      }else if (req.query.post_id && req.query.comment_id) {
+        const results = await Comment.find({"post_id" : req.query.post_id ,"comment_id": req.query.comment_id});
+        if(!results) throw Error('No community exist');
+        res.status(200).json(results);
+      }
+
+    }
+    catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  });
+
+
+
   /**
    * @route   POST api/comment
    * @desc    perform comment creation
