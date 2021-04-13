@@ -122,6 +122,46 @@ router.patch("/", auth, async (req, res)=> {
   }
 });
 
+
+      /**
+       * @route   GET api/post/likesort
+       * @desc    show post based on likes
+       */
+
+
+        router.get("/likesort", auth,  async (req, res)=> {
+           try {
+             const results = await Post.find({}).sort({likes:-1});
+             if(!results) throw Error('No post exist');
+             res.status(200).json(results);
+           }
+           catch (e) {
+             res.status(400).json({ msg: e.message });
+           }
+         });
+
+/**
+ * @route   PATCH api/post/like
+ * @desc    perform post likes update
+ */
+
+router.patch("/like", auth, async (req, res)=> {
+  try {
+    const {post_id, likes} = req.body;
+    if (!post_id || !likes) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+    }
+    Post.update({post_id}, {$set: {likes}}).exec(function(err, result){
+      if (result.n == 0) return res.status(400).json({msg: "post does not exist"});
+      res.status(200).json(result);
+    });
+  }
+  catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+});
+
+
 /**
  * @route   DELETE api/post
  * @desc    perform post deletion
