@@ -13,6 +13,7 @@ function Profile(props) {
         displayname= {props.user.name}
         username ={props.user.user_id}
         bio = {props.user.bio}
+        token = {props.token}
         />
         
         </div>
