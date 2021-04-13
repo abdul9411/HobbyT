@@ -20,33 +20,33 @@ const auth = require ('../../middleware/auth');
   });
 
   /**
-   * @route   GET api/community/query
-   * @desc    show a list of community info
+   * @route   GET api/communityuser/query
+   * @desc    show specific post info
    */
 
-     router.get("/query",auth, async (req, res)=> {
-        try {
-          if(!req.query.name && req.query.community_id){
-            const results = await Community.find({'community_id': req.query.community_id});
-            if(!results) throw Error('No community exist');
-            res.status(200).json(results);
+   router.get("/query",auth, async (req, res)=> {
+      try {
+        if(!req.query.user_id && req.query.community_id){
+          const results = await CommunityUser.find({'community_id': req.query.community_id});
+          if(!results) throw Error('No community user exists');
+          res.status(200).json(results);
 
-          }else if (req.query.name && !req.query.community_id) {
-            const results = await Community.find({"name" : req.query.name});
-            if(!results) throw Error('No community exist');
-            res.status(200).json(results);
+        }else if (req.query.user_id && !req.query.community_id) {
+          const results = await CommunityUser.find({"user_id" : req.query.user_id});
+          if(!results) throw Error('No community user exists');
+          res.status(200).json(results);
 
-          }else if (req.query.name && req.query.community_id) {
-            const results = await Community.find({"name" : req.query.name ,"community_id": req.query.community_id});
-            if(!results) throw Error('No community exist');
-            res.status(200).json(results);
-          }
-
+        }else if (req.query.user_id && req.query.community_id) {
+          const results = await CommunityUser.find({"user_id" : req.query.user_id ,"community_id": req.query.community_id});
+          if(!results) throw Error('No community user exists');
+          res.status(200).json(results);
         }
-        catch (e) {
-          res.status(400).json({ msg: e.message });
-        }
-      });
+
+      }
+      catch (e) {
+        res.status(400).json({ msg: e.message });
+      }
+    });
 
 
   /**
