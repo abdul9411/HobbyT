@@ -1,15 +1,51 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Sidebar from "../Templates/sidebar.js"
 import Notification_div from "./Notification_div.js"
 import "./Notifications.css"
+import Homefeedheader from '../Templates/Homefeedheader'
+import axios from 'axios';
 
 function Notifications(props) {
+    const[myNotifdata, updatenotifdata]=useState([])
+    const receiverID= props.user.user_id
+
+    useEffect(()=>{
+        axios.defaults.headers.common['x-auth-token'] = props.token;
+        axios.get(`http://localhost:3001/api/notification/query`,{
+            params:{
+                receiver_user_id: receiverID
+            }
+        }).then((response)=>{
+            updatenotifdata(response.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    })
+
+   
+
     return (
         <div className="notifications">
         <Sidebar className="sidebar-notif"/>
-        <Notification_div
-            name= "Notifications"
-        />
+        <div className="feedHeader">
+        <Homefeedheader 
+               name= "Notifications"
+           />
+        {myNotifdata.map(
+            item=>(
+              <Notification_div
+                name = "Notifications"
+                id= {item.sender_user_id} 
+                action= {item.title}
+                timestamp = {item.date}
+                content = {item.content}
+              />
+            )
+          )}
+            <div className="endnote">No More Notifications to Show</div>
+        </div>
+        <div className="padding"></div>
+    
         </div>
     );
 }
