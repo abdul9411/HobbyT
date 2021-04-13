@@ -70,6 +70,30 @@ router.post("/", auth, async (req, res)=> {
     }
   });
 
+
+/**
+ * @route   DELETE api/notification/delete
+ * @desc    perform notification deletion for a post
+ */
+
+router.delete("/delete", auth, async (req,res)=> {
+  try {
+    const {post_id} = req.body;
+    if (!post_id) {
+      return res.status(401).json({ msg: 'Please enter all fields' });
+    }
+    Notification.remove({post_id}).exec(function(err, result){
+      if (result.n == 0) return res.status(400).json({msg: "notification does not exist"});
+      res.status(200).json(result);
+    });
+  }
+  catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+});
+
+
+
 /**
  * @route   DELETE api/notification
  * @desc    perform notification deletion
