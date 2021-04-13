@@ -5,12 +5,14 @@ import Homefeed from './homefeed.js'
 import './homepage.css'
 import axios from 'axios'
 
+
 function Homepage(props) {
     return (
         <div className="homepg">
-        <Sidebar removeToken={props.removeToken}/>
+        <Sidebar/>
         <Homefeed
-            user = {props}
+            user = {props.user}
+            token = {props.token}
         />
         <Widgets/>
         </div>
