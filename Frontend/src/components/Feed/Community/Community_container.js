@@ -8,7 +8,8 @@ function Community_container(props) {
     const UserID= props.user.user_id;
     const [communitylist, setlist]=useState([])
     useEffect(() => {
-    axios.get(`${process.env.REACT_API_URL}/community`)
+    axios.defaults.headers.common['x-auth-token'] = props.token;    
+    axios.get(`http://localhost:3001/api/community`)
     .then((response)=>{
     setlist(response.data)
     })
@@ -24,10 +25,10 @@ function Community_container(props) {
                 name = {item.name}
                 description = {item.description}
                 userID= {UserID}
+                token = {props.token}
             />
             )
           )}
-
         </div>
     );
 }
