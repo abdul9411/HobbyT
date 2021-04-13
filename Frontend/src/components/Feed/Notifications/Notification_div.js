@@ -1,43 +1,36 @@
-import React , {
-    useState,
-    useEffect
-    
-}from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Notification_div.css"
 import Homefeedheader from '../Templates/Homefeedheader.js'
-import axios from 'axios';
 import Notificationcontainer from './Notificationcontainer.js'
-require('dotenv').config();
+import axios from 'axios'
 
 
-function Notification_div(props) {
-const [notifs, setResult]= useState([])
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}`,{
-        params: {
-          user_id:props.user.user_id
-        }
+function Notification_div({name, action,timestamp, content, id}) {
+    const[dpname,changedpname]= useState("")
+    useEffect(()=>{
+        axios.get(`http://localhost:3001/api/auth/user/query`,{
+            params:{
+                user_id: id
+            }
+        }).then((response)=>{
+            changedpname(response.data[0].name)
+        }).catch((err)=>{
+            console.log(err)
         })
-        .then((response)=>{
-            setResult(response.data)
-        })
-      }, []);
-    return (
-     
+    })
+
+return(
         <div className="notifdiv">
-        <Homefeedheader
-            name= {props.name}
-        />
-              {notifs.map(
-         item=>(
-             <Notificationcontainer
-            displayname = {item.title}
-            action = {item.content}
-        />
-         )
-       )}
+         {name&&action&&timestamp&&
+           <Notificationcontainer
+                timestamp = {timestamp}
+                displayname = {dpname}
+                action = {action}
+                content = {content}
+           />
+           }
         </div>
-    );
+)
 }
 
 export default Notification_div;
