@@ -8,7 +8,7 @@ const auth = require ('../../middleware/auth');
  * @desc    show a list of community info
  */
 
- router.get("/", async (req, res)=> {
+ router.get("/", auth, async (req, res)=> {
     try {
       const results = await Community.find({});
       if(!results) throw Error('No community exist');
