@@ -11,16 +11,18 @@ function Profile_data(props) {
     const user_id= props.username
     const [posts, setposts]= useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_API_URL}/post`,{
+      axios.defaults.headers.common['x-auth-token'] = props.token;
+        axios.get(`http://localhost:3001/api/post/query`,{
         params: {
-          user_id:{user_id}
+          user_id: user_id
         }
         })
         .then((response)=>{
           setposts(response.data)
-          // axios returns API response body in .data
+
         })
       }, []);
+
     return (
         <div className="my_profile">
          <Homefeedheader
@@ -39,11 +41,13 @@ function Profile_data(props) {
             item=>(
               <Posts
                 username= {item.user_id}
-                displayName = {props.displaynam}
+                displayName = {props.displayname}
                 text = {item.content} 
                 avatar = {props.icon}
                 timestamp = {item.date}
-                userid = {item.user_id}
+                userid = {props.username}
+                likeCount = {item.likes}
+                post_id = {item.post_id}
               />
             )
           )}
