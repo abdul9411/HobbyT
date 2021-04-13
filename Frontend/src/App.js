@@ -11,7 +11,7 @@ import Login from "./components/login/login";
 import SignUp from "./components/signup/signup";
 import './components/Feed/App.css';
 import Homepage from "./components/Feed/Home/Homepage.js"
-import CommFeedRoute from './components/Feed/Community/Comm_feed_route'
+import Comm_feed_route from './components/Feed/Community/Comm_feed_route'
 import Community from './components/Feed/Community/Community.js'
 import Notifications from './components/Feed/Notifications/Notifications.js'
 import Profile from './components/Feed/Profile/Profile.js'
@@ -75,11 +75,11 @@ function App() {
           </Route>
           {/* route to notifications */}
           <Route exact path="/notifications">
-            {!cookies.get('user') ? <Redirect to="/" /> : <Notifications />}
+            {!cookies.get('user') ? <Redirect to="/" /> : <Notifications user={cookies.get('user')} token={cookies.get('token')} />}
           </Route>
           {/* route to community */}
-          <Route exact path="/community/:id">
-            {!cookies.get('user') ? <Redirect to="/" /> : <CommFeedRoute user={cookies.get('user')} token={cookies.get('token')}/>}
+          <Route path="/community/:id">
+            {!cookies.get('user') ? <Redirect to="/" /> : <Comm_feed_route user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
         </div>
         </React.Fragment>
