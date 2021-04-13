@@ -28,7 +28,7 @@ function Smallcomment({
        {commentexists===true&&
         <div className="a-comment">
         <Avatar/>@{userID} says: {comment}
-           <Collapsible trigger=" ••• " >{myID===userID&&<button onClick={deletecomment} className="btn btn-danger btn-sm">delete comment
+           <Collapsible trigger=" ••• " >{myID===userID&&<button onClick={deletecomment} className="btn btn-danger btn-sm">Delete comment
            </button>}{myID!==userID&&<button className="btn btn-dark btn-sm">Report comment</button>}</Collapsible>
            </div>
         }
