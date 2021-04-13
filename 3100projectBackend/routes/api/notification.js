@@ -55,6 +55,22 @@ router.post("/", auth, async (req, res)=> {
 
 
 /**
+ * @route   GET api/notification/query
+ * @desc    show specific notification for a receiver_user_id
+ */
+
+ router.get("/query", auth, async (req, res)=> {
+    try {
+        const results = await Notification.find({'receiver_user_id': req.query.receiver_user_id});
+        if(!results) throw Error('No Notifications exist');
+        res.status(200).json(results);
+    }
+    catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  });
+
+/**
  * @route   DELETE api/notification
  * @desc    perform notification deletion
  */
