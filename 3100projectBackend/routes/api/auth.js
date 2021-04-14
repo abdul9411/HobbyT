@@ -222,6 +222,24 @@ router.get("/user/all", auth, async (req, res)=> {
   }
 });
 
+
+/**
+ * @route   GET api/auth/user/query
+ * @desc    show specific user info based on id
+ */
+
+ router.get("/user/query", auth, async (req, res)=> {
+    try {
+        const results = await User.find({'user_id': req.query.user_id});
+        if(!results) throw Error('No user exist');
+        res.status(200).json(results);
+    }
+    catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  });
+
+
 /**
  * @route   PATCH api/auth/user/bio
  * @desc    perform bio update
