@@ -154,7 +154,7 @@ router.get('/user', auth, async (req, res) => {
 
 
 /**
- * @route   PATCH api/user
+ * @route   PATCH api/auth/user
  * @desc    perform username update
  */
 
@@ -175,7 +175,7 @@ router.patch("/user", auth, async (req, res)=> {
 });
 
 /**
- * @route   PATCH api/user/password
+ * @route   PATCH api/auth/user/password
  * @desc    perform user passowrd update
  */
 
