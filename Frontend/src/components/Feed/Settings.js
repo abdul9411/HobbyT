@@ -145,14 +145,14 @@ function Settings(props) {
         <div>
           <h3 className="upheader">🔑Change Password</h3>
         </div>
-        <div><input className="upinput" type="text" onChange={changePassword(this.value)}></input></div>
+        <div><input className="upinput" type="text" onChange={() => changePassword(this.value)}></input></div>
       </div>
 
       <div className="update_bio">
         <div>
           <h3 className="ubheader">📕 Update bio</h3>
         </div>
-        <div><input className="ubinput" type="text" onChange={changeBio(this.value)}></input></div>
+        <div><input className="ubinput" type="text" onChange={()=>changeBio(this.value)}></input></div>
       </div>
 
       <hr></hr>
@@ -207,4 +207,3 @@ function Settings(props) {
 }
 
 export default Settings;
-
