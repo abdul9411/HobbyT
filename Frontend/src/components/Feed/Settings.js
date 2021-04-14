@@ -199,7 +199,7 @@ function App(props) {
       </div>
       <hr></hr>
       <div className="aboutdiv">
-        <button className="about" href="/src/hobbyt-background-logo.png">🛈 About</button>
+        <button className="about" href="./about.png">🛈 About</button>
       </div>
       <div>
 
