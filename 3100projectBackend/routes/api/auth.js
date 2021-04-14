@@ -197,7 +197,7 @@ router.patch("/user/password", auth, async (req, res)=> {
 	}
 
     User.update({user_id}, {$set: {password: hash}}).exec(function(err, result){
-     if (result.n == 0) return res.status(400).json({msg: "User does not exist"}); //Q: if there is no matched data -> throw error/send error message?
+     if (result.n == 0) return res.status(400).json({msg: "User does not exist"});
       res.status(200).json(result);
     });
   }
