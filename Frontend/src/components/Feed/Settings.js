@@ -76,7 +76,7 @@ function Settings(props) {
   useEffect(() => {
     Axios.get("http://localhost:3001/api/community/query", {
       params: {
-        user_id = props.user.user_id
+        user_id : props.user.user_id
       }
     })
       .then((response) => {
