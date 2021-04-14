@@ -1,30 +1,27 @@
-import './App.css';
+import './Settings.css';
 import { useState, useEffect } from "react";
 import Axios from 'axios'
 
-function App(props) {
+function Settings(props) {
 
   const [avatar, setAvatar] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png")
 
-  const [userName, setUserName] = useState("props.user.username")
+  const userName = props.user.username
 
-  const userId = "props.user.userId"
+  const user_id = props.user.user_id
 
-  const [bio, setBio] = useState("props.use.bio")
+  const [bio, setBio] = props.user.bio
 
   const [blockList, setblockList] = useState([])
 
   const [communityList, setCommunityList] = useState([])
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/blocked", {
+    Axios.get("http://localhost:3001/blockuser/", {
       params: {
-        userId: props.user.user_id
+        user_id: props.user.user_id
       }
-    })
-      //response is coming from the response sent by /read
-      //setting userlist = response.data
-      .then((response) => { setblockList(response.data) })
+    }).then((response) => { setblockList(response.data) })
       .catch(() => { alert("failure to retrieve blocked list") })
   }, [])
 
@@ -132,7 +129,7 @@ function App(props) {
       </div>
 
       <div className="userId">
-        <p>{userId}</p>
+        <p>{user_id}</p>
       </div>
 
       <div className="bio">
@@ -199,7 +196,7 @@ function App(props) {
       </div>
       <hr></hr>
       <div className="aboutdiv">
-        <button className="about" href="./about.png">🛈 About</button>
+        <button className="about" href="/src/hobbyt-background-logo.png">🛈 About</button>
       </div>
       <div>
 
@@ -209,4 +206,5 @@ function App(props) {
   );
 }
 
-export default App;
+export default Settings;
+
