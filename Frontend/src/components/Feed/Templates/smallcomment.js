@@ -26,7 +26,7 @@ function Smallcomment({
     function reportcomm(){
         confirmAlert({
             title: 'We value your opinions!',
-            message: `you have flagged comment#${commentID} as inappropriate. Please contact system admin with the comment ID and your complain`,
+            message: `you have flagged comment#${commentID} as inappropriate. Please contact system admin with the comment ID and your complaint`,
             buttons: [
               {
                 label: 'Ok',
