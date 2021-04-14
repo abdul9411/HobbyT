@@ -8,7 +8,7 @@ import axios from 'axios'
 function Notification_div({name, action,timestamp, content, id}) {
     const[dpname,changedpname]= useState("")
     useEffect(()=>{
-        axios.get(`http://localhost:3001/api/auth/user/query`,{
+        axios.get(`http://localhost:3001/api/auth/user`,{
             params:{
                 user_id: id
             }
