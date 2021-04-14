@@ -24,7 +24,7 @@ function Postbox(props) {
 
     useEffect(() => {
         axios.defaults.headers.common['x-auth-token'] = props.token;
-        axios.get(`http://localhost:3001/api/auth/user/query`,{
+        axios.get(`http://localhost:3001/api/auth/user`,{
         params: {
             user_id: myID
         }
