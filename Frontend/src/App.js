@@ -15,6 +15,7 @@ import Comm_feed_route from './components/Feed/Community/Comm_feed_route'
 import Community from './components/Feed/Community/Community.js'
 import Notifications from './components/Feed/Notifications/Notifications.js'
 import Profile from './components/Feed/Profile/Profile.js'
+import Settings from './components/Feed/Settings.js'
 import axios from 'axios';
 
 function App() {
@@ -80,6 +81,9 @@ function App() {
           {/* route to community */}
           <Route path="/community/:id">
             {!cookies.get('user') ? <Redirect to="/" /> : <Comm_feed_route user={cookies.get('user')} token={cookies.get('token')}/>}
+          </Route>
+          <Route path="/settings">
+            {!cookies.get('user') ? <Redirect to="/" /> : <Settings user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
         </div>
         </React.Fragment>
