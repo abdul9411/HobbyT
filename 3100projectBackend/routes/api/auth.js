@@ -174,6 +174,37 @@ router.patch("/user", auth, async (req, res)=> {
   }
 });
 
+/**
+ * @route   PATCH api/user/password
+ * @desc    perform user passowrd update
+ */
+
+router.patch("/user/password", auth, async (req, res)=> {
+  try {
+    const {user_id, password} = req.body;
+    if ( !password || !user_id) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+    }
+	var hash;
+	if(password.length <= 20){
+		const salt = await bcrypt.genSalt(10);
+		if (!salt) throw Error('bcrypt error');
+
+		hash = await bcrypt.hash(password, salt);
+		if (!hash) throw Error('hashing password error');
+	}else{
+		hash = password;
+	}
+
+    User.update({user_id}, {$set: {password: hash}}).exec(function(err, result){
+     if (result.n == 0) return res.status(400).json({msg: "User does not exist"}); //Q: if there is no matched data -> throw error/send error message?
+      res.status(200).json(result);
+    });
+  }
+  catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+});
 
 /**
  * @route   GET api/auth/user/all
