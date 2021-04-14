@@ -72,7 +72,7 @@ function Postbox(props) {
           avatar: "2"
       })
       .then((response)=>
-         submitPost(""), notify()
+         response.status===200&&window.location.reload()&&submitPost("")
       )
       .catch((error)=>{
           console.log(error)
