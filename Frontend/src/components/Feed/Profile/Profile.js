@@ -10,7 +10,7 @@ function Profile(props) {
     
     
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/auth/user/query`,{
+        axios.get(`http://localhost:3001/api/auth/user`,{
         params: {
           user_id: props.user.user_id,
         }
