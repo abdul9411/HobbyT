@@ -183,7 +183,7 @@ router.patch("/user", auth, async (req, res)=> {
 router.get("/user/all", auth, async (req, res)=> {
   try {
     const results = await User.find({});
-    if(!results) throw Error('No comment exist');
+    if(!results) throw Error('No user exist');
     res.status(200).json(results);
   }
   catch (e) {
@@ -203,7 +203,7 @@ router.patch("/user/bio", auth, async (req, res)=> {
       return res.status(400).json({ msg: 'Please enter all fields' });
     }
     User.update({user_id}, {$set: {user_id, bio}}).exec(function(err, result){
-      if (result.n == 0) return res.status(400).json({msg: "comment does not exist"});
+      if (result.n == 0) return res.status(400).json({msg: "bio does not exist"});
       res.status(200).json(result);
     });
   }
@@ -215,7 +215,7 @@ router.patch("/user/bio", auth, async (req, res)=> {
 
 /**
  * @route   GET api/auth/user/query
- * @desc    show specific post info
+ * @desc    show specific user info
  */
 
  router.get("/user/query", auth, async (req, res)=> {
