@@ -117,7 +117,7 @@ router.delete("/", auth, async (req,res)=> {
       return res.status(401).json({ msg: 'Please enter all fields' });
     }
     LikePost.remove({post_id}).exec(function(err, result){
-      if (result.n == 0) return res.status(400).json({msg: "likepost does not exist"});
+//       if (result.n == 0) return res.status(400).json({msg: "likepost does not exist"});
       res.status(200).json(result);
     });
   }
