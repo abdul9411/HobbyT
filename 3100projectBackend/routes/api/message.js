@@ -11,7 +11,6 @@ const mongoose = require('mongoose');
  * @route   GET api/global
  * @desc    show a list of globalmessage info
  */
-
 router.get("/global", auth, async (req, res)=> {
   GlobalMessage.aggregate([
        {
@@ -22,7 +21,7 @@ router.get("/global", auth, async (req, res)=> {
                as: 'fromObj',
            },
        },
-   ])
+   ]).sort({date: -1})
        .project({
            'fromObj.password': 0,
            'fromObj.__v': 0,
@@ -47,20 +46,19 @@ router.get("/global", auth, async (req, res)=> {
    * @desc    perform globalmessage creation
    */
 
+
 router.post("/global", auth, async (req, res)=> {
 
-  const {body} = req.body;
-  if (!body ) {
+  const {body, from} = req.body;
+  if (!body|| !from) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
 
-  var io = req.app.get('socketio');
-  //console.log(io);
-  io.emit('messages', req.body.body);
+
 
   try {
     const newGlobalMessage = new GlobalMessage({
-      from: req.user.user_object_id,
+      from,
       body
     });
     //console.log(req.user);
@@ -74,6 +72,8 @@ router.post("/global", auth, async (req, res)=> {
     res.status(400).json({ msg: e.message });
   }
 });
+
+
 
 
 /**
