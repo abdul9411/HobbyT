@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://dbUser:dbUser@cluster0.oss8k.mongodb.net/3100projectDB?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://Hanzalah:Hanzalah@cluster0.yduu7.mongodb.net/csci3100?retryWrites=true&w=majority",
   "jwtSecret": "sl_myJwtSecret"
 }
