@@ -25,27 +25,6 @@ import history from './components/chat/Utilities/history';
 import PrivateRoute from './components/chat/Utilities/private-route';
 import Chat from './components/chat/Chat/Chat';
 
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            light: '#58a5f0',
-            main: '#000',
-            dark: '#004c8c',
-        },
-        secondary: {
-            light: '#ffd95a',
-            main: '#f9a825',
-            dark: '#c17900',
-            contrastText: '#212121',
-        },
-        background: {
-            default: '#f0f0f0',
-        },
-    },
-    typography: {
-        useNextVariants: true,
-    },
-});
 
 function App() {
   const cookies = new Cookies();
@@ -115,16 +94,19 @@ function App() {
             {!cookies.get('user') ? <Redirect to="/" /> : <Settings user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
           {/* route to chat */}
-          <Route path="/chat" exact component={Chat} >
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
-                    <Router history={history}>
-                          {!cookies.get('user') ? <Redirect to="/" /> : <Chat user={cookies.get('user')} token={cookies.get('token')} />}
-                    </Router>
-                </SnackbarProvider>
-            </ThemeProvider>
+         <Route path="/chat">
+            {!cookies.get('user') ? <Redirect to="/" /> : <GlobalUI user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
+//           <Route path="/chat" exact component={Chat} >
+//             <ThemeProvider theme={theme}>
+//                 <CssBaseline />
+//                 <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
+//                     <Router history={history}>
+//                           {!cookies.get('user') ? <Redirect to="/" /> : <Chat user={cookies.get('user')} token={cookies.get('token')} />}
+//                     </Router>
+//                 </SnackbarProvider>
+//             </ThemeProvider>
+//           </Route>
         </div>
         </React.Fragment>
       </Switch>
