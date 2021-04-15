@@ -24,6 +24,7 @@ import axios from 'axios';
 import history from './components/chat/Utilities/history';
 import PrivateRoute from './components/chat/Utilities/private-route';
 import Chat from './components/chat/Chat/Chat';
+import GlobalUI from './components/globalmessage/globalUI';
 
 
 function App() {
@@ -97,16 +98,6 @@ function App() {
          <Route path="/chat">
             {!cookies.get('user') ? <Redirect to="/" /> : <GlobalUI user={cookies.get('user')} token={cookies.get('token')}/>}
           </Route>
-//           <Route path="/chat" exact component={Chat} >
-//             <ThemeProvider theme={theme}>
-//                 <CssBaseline />
-//                 <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
-//                     <Router history={history}>
-//                           {!cookies.get('user') ? <Redirect to="/" /> : <Chat user={cookies.get('user')} token={cookies.get('token')} />}
-//                     </Router>
-//                 </SnackbarProvider>
-//             </ThemeProvider>
-//           </Route>
         </div>
         </React.Fragment>
       </Switch>
