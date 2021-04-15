@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import logo from "./hb1.png";
+import logo from "./logo.png";
 import logInStyle from './login.css';
 import axios from 'axios';
 
