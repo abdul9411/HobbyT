@@ -121,7 +121,7 @@ function SignUp({
       </Helmet>
       {/* Sign up page contents */}
       <h2 className="form-header">Create your account </h2>
-      <form method="post" onSubmit={handleSubmit}>
+      <form method="post" onSubmit={handleSubmit} autocomplete="off">
         <div className="mb-3" >
           <input className="form-control form-control-lg"
             type="text"
