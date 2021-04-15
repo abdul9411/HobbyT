@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import logo from "./logo.png";
+import logo from "./hb1.png";
 import logInStyle from './login.css';
 import axios from 'axios';
+
 
 function LogIn({ storeToken }) {
     /* CSS module styles */
@@ -64,8 +65,9 @@ function LogIn({ storeToken }) {
                 {/* Left container  */}
                 <div className="col-6">
                     <div className="left-container">
-                        <img src={logo} alt="HobbyT logo" />
+                        <img className = "logohobbyt"src={logo} alt="HobbyT logo" />
 
+                        
                         {/* Description */}
 
                         <p className="form-paragraph">
@@ -76,7 +78,7 @@ function LogIn({ storeToken }) {
                 {/* Right container  Login form*/}
                 <div className="col-6">
                     <div className="lform-container">
-                        <form method="post" onSubmit={handleSubmit} autocomplete="off"> 
+                        <form method="post" onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <input
                                     className="form-control form-control-lg"
