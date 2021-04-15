@@ -70,7 +70,7 @@ function Posts({
           data:{
             post_id: post_id
           }
-          }).then((response)=>response.status===200&&window.location.reload)
+          }).then((response)=>response.status===200&&window.location.reload())
       .catch((e)=>console.log(e)))
     }
 
