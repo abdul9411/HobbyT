@@ -5,12 +5,17 @@
     margin-right: auto;
     max-width: 1350px;
     padding: 0 10px;
-  
-  
+    
 }
 .feedHeader{
     flex:0.5;
     background-color: white;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.feedHeader::-webkit-scrollbar{
+    display: none;
 }
 .padding{
     flex: 0.03;
