@@ -7,7 +7,7 @@ function Notificationcontainer(props) {
         <div className="notif-container-tab">
         <Avatar className="avatar-notif" src ={props.src}/>
        
-        <span className="text-notif"> {props.timestamp} : {props.displayname} has {props.action} your post</span>
+        <span className="text-notif"> {props.timestamp} : {props.displayname} has {props.action}</span>
         <div>You posted: {props.content}</div>
       </div>
         
