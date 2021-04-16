@@ -8,7 +8,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import SidebarOption from "./SidebarOptions"
-import Logo from './logo.JPG'
+import Logo from './logo.png'
 
 function Sidebar() {
     return (
