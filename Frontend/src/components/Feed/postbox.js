@@ -54,8 +54,10 @@ function Postbox(props) {
                username: "ANONYMOUS HOBBYTER",
                avatar: "2"
            })
-           .then((response)=>
-              submitPost(""), notify()
+           .then((response)=>{
+               submitPost("")
+              response.status===200&&window.location.reload()
+            }
            )
            .catch((error)=>{
                console.log(error)
