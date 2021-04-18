@@ -4,19 +4,25 @@ import React, {
 import {
   Helmet
 } from 'react-helmet';
-import axios from 'axios';
-
 import SignUpStyle from "./signup.css";
 
-function SignUp({
-  storeToken
-}) {
+import axios from 'axios';
+
+function SignUp({ storeToken }) {
   /* CSS module styles */
   const button = SignUpStyle.button;
   const div = SignUpStyle.div;
   const form = SignUpStyle.form;
 
-  // Checks if the form has errors or not to determine whether to post the request to server or show errors
+  /**
+   * Checks if the form has errors
+   * If any key in the object has an error message, valid is set to false
+   * otherwise valid is set to true
+   * @param {Object} errors - contains the errors messages if any
+   * @returns {boolean} true if form is valid, false otherwise
+   */
+
+
   const validateForm = (errors) => {
     let valid = true;
     Object.values(errors).forEach(
@@ -25,7 +31,7 @@ function SignUp({
     return valid;
   }
 
-  // initial state of User input
+  // initial state of User input and errors
   const [values, setValues] = useState({
     username: '',
     email: '',
@@ -40,13 +46,14 @@ function SignUp({
     }
   });
 
+  /**
+   * Changes the value of the field that the user edits
+   * Checks if any of the cases is false and updates the erros messages accordingly
+   * @param {object} event 
+   */
 
   function handleChange(event) {
-    // Changes the value of the field that the user edits
-    const {
-      name,
-      value
-    } = event.target
+    const { name, value } = event.target
     setValues(preValues => {
       return {
         ...preValues,
@@ -86,7 +93,13 @@ function SignUp({
 
   }
 
-  // Checks if all inputs are valid and does a post request if it is otherwise it does not post the request to server
+  /**
+   * Calls @function validateForm
+   * If the function call returns true, a post request is made to the server
+   * If the server response is success, calls a callback function to create a cookie
+   * Otherwise an error message will be shown 
+   * @param {object} event 
+   */
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -115,11 +128,15 @@ function SignUp({
 
   return (
     <div className="sform-container">
+
       { /* Edits title of the page */}
+
       <Helmet >
         <title>HobbyT - Signup </title>
       </Helmet>
+
       {/* Sign up page contents */}
+      
       <h2 className="form-header">Create your account </h2>
       <form method="post" onSubmit={handleSubmit} autocomplete="off">
         <div className="mb-3" >
@@ -127,12 +144,8 @@ function SignUp({
             type="text"
             name="username"
             placeholder="Username"
-            value={
-              values.username
-            }
-            onChange={
-              handleChange
-            }
+            value={values.username}
+            onChange={handleChange}
             required />
           {values.errors.username && <p> {values.errors.username}</p>}
           {values.errors.DuplicateUser && <p> {values.errors.DuplicateUser}</p>}
@@ -143,12 +156,8 @@ function SignUp({
             type="email"
             name="email"
             placeholder="Email"
-            value={
-              values.email
-            }
-            onChange={
-              handleChange
-            }
+            value={values.email}
+            onChange={handleChange}
             required />
           {values.errors.email && <p> {values.errors.email}</p>}
         </div>
@@ -158,12 +167,8 @@ function SignUp({
             type="password"
             name="password"
             placeholder="Password"
-            value={
-              values.password
-            }
-            onChange={
-              handleChange
-            }
+            value={values.password}
+            onChange={handleChange}
             required />
           {values.errors.password && <p> {values.errors.password}</p>}
         </div>
@@ -173,12 +178,8 @@ function SignUp({
             type="password"
             name="password2"
             placeholder="Confirm password"
-            value={
-              values.password2
-            }
-            onChange={
-              handleChange
-            }
+            value={values.password2}
+            onChange={handleChange}
             required />
           {values.errors.password2 && <p> {values.errors.password2}</p>}
         </div>

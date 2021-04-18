@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import logo from "./logo.png";
 import logInStyle from './login.css';
+
 import axios from 'axios';
 
 
@@ -19,8 +20,13 @@ function LogIn({ storeToken }) {
         error: ''
     });
 
-    // send post request to server and returns a messsage error if username and password does not match
-    // Otherwise creates a cookie and goes to the home page
+    /**
+     * Sends a post request to the server
+     * Returns a messsage error if username and password does not match
+     * Otherwise calls a callback function to create a cookie
+     * @param {object} event 
+     */
+
     function handleSubmit(event) {
 
         event.preventDefault();
@@ -43,7 +49,11 @@ function LogIn({ storeToken }) {
             )
     }
 
-    // Changes the value of the fields that the user edits
+    /**
+     * Changes the value of the fields that the user edits
+     * @param {Object} event 
+     */
+
     function handleChange(event) {
         const { name, value } = event.target;
 
@@ -57,25 +67,33 @@ function LogIn({ storeToken }) {
 
     return (
         <div className="container">
+
             {/* edits the webpage title */}
+
             <Helmet>
                 <title>HobbyT - login or sign up</title>
             </Helmet>
             <div className="row justify-content-start">
+            
                 {/* Left container  */}
+
                 <div className="col-6">
                     <div className="left-container">
-                        <img className = "logohobbyt" src={logo} alt="HobbyT logo" />
 
-                        
+                        {/* website logo */}
+
+                        <img className="logohobbyt" src={logo} alt="HobbyT logo" />
+
                         {/* Description */}
 
                         <p className="form-paragraph">
                             HobbyT allows you to express your opinions and views in a safe and anonymous manner.
-                    </p>
+                        </p>
                     </div>
                 </div>
+
                 {/* Right container  Login form*/}
+
                 <div className="col-6">
                     <div className="lform-container">
                         <form method="post" onSubmit={handleSubmit}>
