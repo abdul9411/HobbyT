@@ -11,7 +11,7 @@ const JWT_SECRET  = config.get("jwtSecret");
 
   try {
     const decodedData = jwt.verify(token, JWT_SECRET);
-    req.user = decodedData;
+    req.user = decodedData; //get data from the token
     next();
   } catch (e) {
     res.status(401).json({ msg: 'invaild token' });

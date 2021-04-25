@@ -21,7 +21,7 @@ const auth = require ('../../middleware/auth');
 
   /**
    * @route   GET api/community/query
-   * @desc    show a list of community info
+   * @desc    show a list of community info based on the query
    */
 
      router.get("/query",auth, async (req, res)=> {
@@ -84,7 +84,7 @@ router.post("/",auth,  async (req, res)=> {
 
 /**
  * @route   PATCH api/community
- * @desc    perform community update
+ * @desc    perform community info update
  */
 
 router.patch("/", auth, async (req, res)=> {

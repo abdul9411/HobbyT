@@ -78,7 +78,7 @@ router.post("/global", auth, async (req, res)=> {
 
 /**
  * @route   GET api/conversation
- * @desc    show a list of conversation info
+ * @desc    show a list of conversation info of the user
  */
 
 router.get("/conversation", auth, async (req, res)=> {
@@ -112,7 +112,7 @@ router.get("/conversation", auth, async (req, res)=> {
  });
 
  /**
-  * @route   GET api/conversation
+  * @route   GET api/conversation/query
   * @desc    show particular conversation info
   */
 

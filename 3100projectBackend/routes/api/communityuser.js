@@ -21,7 +21,7 @@ const auth = require ('../../middleware/auth');
 
   /**
    * @route   GET api/communityuser/query
-   * @desc    show specific post info
+   * @desc    show specific post info based on the query
    */
 
    router.get("/query",auth, async (req, res)=> {

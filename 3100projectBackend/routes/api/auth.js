@@ -81,7 +81,6 @@ router.post('/login', async (req, res) => {
  * @desc    perform user registration
  */
 
-//new version: handle duplicated name cases and wait for userid initialization
 router.post('/register', async (req, res) => {
   var userid = 1;
   var userrole = "user";
@@ -107,7 +106,7 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     if (!salt) throw Error('bcrypt error');
 
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(password, salt); //encrypt the password
     if (!hash) throw Error('hashing password error');
 
     const newUser = new User({
@@ -208,7 +207,7 @@ router.patch("/user/password", auth, async (req, res)=> {
 
 /**
  * @route   GET api/auth/user/all
- * @desc    Get user data
+ * @desc    Get a list of  user data
  */
 
 router.get("/user/all", auth, async (req, res)=> {

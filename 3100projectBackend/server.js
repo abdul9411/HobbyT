@@ -4,7 +4,7 @@
 const express = require("express"); //connect to server
 const mongoose = require("mongoose"); // connect to database
 const bodyParser = require("body-parser"); // get body content from a form
-const cors = require("cors");
+const cors = require("cors"); //enable CORS
 require('body-parser-xml')(bodyParser);
 
 
@@ -51,4 +51,4 @@ const port = process.env.PORT || 3001;
 const server = app.listen(port,'0.0.0.0', () => console.log(`Server started on port ${port}`));
 const io = require('socket.io')(server);
 
-app.set('socketio', io);
+app.set('socketio', io);  //enable real-time communication between the client and server
