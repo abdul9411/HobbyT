@@ -5,8 +5,22 @@ import Notificationcontainer from './Notificationcontainer.js'
 import axios from 'axios'
 
 
+
+  /**
+   * react function default
+   * @param {string} string, @param {string} action
+   * @param {date} timestamp, @param {string} content
+   * @param {int} id 
+   */
+
 function Notification_div({name, action,timestamp, content, id}) {
     const[dpname,changedpname]= useState("")
+
+      /**
+   * searches up user's name from user ID from variable id passed to the main function
+   * if user's name is found it is stored in dpname hook
+   * else error is logged in console
+   */
     useEffect(()=>{
         axios.get(`http://localhost:3001/api/auth/user/query`,{
             params:{
@@ -21,6 +35,7 @@ function Notification_div({name, action,timestamp, content, id}) {
 
 return(
         <div className="notifdiv">
+        {/* renders the notifications if name action and timestamp are all present in data */}
          {name&&action&&timestamp&&
            <Notificationcontainer
                 timestamp = {timestamp}
