@@ -9,6 +9,11 @@ function Notifications(props) {
     const[myNotifdata, updatenotifdata]=useState([])
     const receiverID= props.user.user_id
 
+      /**
+   * fetch a list of notifications whose receiver is the logged in user
+   * If found, set the myNotifdata array to the fetched objects
+   * otherwise console log the error
+   */
     useEffect(()=>{
         axios.defaults.headers.common['x-auth-token'] = props.token;
         axios.get(`http://localhost:3001/api/notification/query`,{
@@ -31,6 +36,10 @@ function Notifications(props) {
         <Homefeedheader 
                name= "Notifications"
            />
+{/* 
+           this maps all the notification objects strored in myNotifdata hook array onto the Notification_div 
+           template */}
+           
         {myNotifdata.map(
             item=>(
               <Notification_div
