@@ -5,6 +5,10 @@ import Postbox from './postbox.js'
 import Posts from './Templates/Posts'
 import Feedheader from './Templates/Feedheader.js'
 
+/**
+   * maps posts onto Posts templates
+   * @param {Object} Template - contains the Post object which contains text content, username etc
+   */
 
 export function CreatePost(Template){
     return(
@@ -18,10 +22,17 @@ export function CreatePost(Template){
     )
 }
 
+
 function Feed(props){
     const [posts, setposts]= useState([])
     const [communityid, setcommunityid] = useState('')
 
+
+    /**
+   * gets community ID from community name
+   * stored community ID in communityid hook
+   * if error is caught it is displayed
+   */
     useEffect(() => {
     axios.defaults.headers.common['x-auth-token'] = props.token;
     axios.get(`http://localhost:3001/api/community/query`,{
@@ -38,7 +49,11 @@ function Feed(props){
     })
   }, []);
 
-
+/**
+   * gets all posts in a community by making a query with community ID
+   * if data is returned all post objects are stored in posts array
+   * otherwise, error is displayed
+   */
   useEffect(() => {
     axios.defaults.headers.common['x-auth-token'] = props.token;
     axios.get(`http://localhost:3001/api/post/query`,{
@@ -67,7 +82,8 @@ return(
       community_id = {communityid}
       token = {props.token}
     />
-    {/* {posts} */}
+
+    {/* posts mapped from posts array onto Posts template */}
     {posts.map(
             item=>(
               <Posts
