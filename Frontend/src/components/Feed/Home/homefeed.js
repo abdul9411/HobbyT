@@ -5,6 +5,10 @@ import Posts from '../Templates/Posts.js'
 import Homefeedheader from '../Templates/Homefeedheader.js'
 require('dotenv').config()
 
+  /**
+   * maps posts onto Posts templates
+   * @param {Object} Template - contains the Post object which contains text content, username etc
+   */
 
 export function CreatePost(Template){
     return(
@@ -19,12 +23,23 @@ export function CreatePost(Template){
 };
 
 
-
-
 function Homefeed(props){
+
+// extracts userID from cookies
 const userId= props.user.user_id;
 const url = `http://localhost:3001/api/communityuser/query`
+
+
+// initially list of communities user has joined is empty
 const [communityID, setID]= useState([])
+
+  
+
+/**
+   * react hook to fetch a list of communities the user has joined using axios
+   * If a list is returned, communityID hook is made to store that list
+   * otherwise the error is shown in the console
+   */
     useEffect(() => {
     axios.defaults.headers.common['x-auth-token'] = props.token;
     axios.get(url,{
@@ -40,10 +55,19 @@ const [communityID, setID]= useState([])
     })
   }, []);
 
-
+  // react hook holds the array of post objects to be displayed
   const [posts, setPosts]= useState([])
-  const[param, change]=useState([])
+
+  //react hook holds an empty array that will be used in storing community IDs of user-joined communities
   const[a, set] = useState([])
+
+  
+
+  /**
+   * react hook to fetch a list of community posts 
+   * If a list is returned, the list is stored in posts hook
+   * otherwise the error is shown in the console
+   */
   useEffect(() => { 
     let data = a
     for (var i = 0; i < communityID.length; i++) {
@@ -65,7 +89,8 @@ const [communityID, setID]= useState([])
 
   }, [communityID]);
 
-  console.log(posts)
+
+
 return(
     
 <div className="homefeed">
@@ -74,8 +99,8 @@ return(
       name = "Home"
   />
   <div className="feedheadhome"></div>
-    {/* {post box} */}
-    {/* {posts} */}
+  
+    {/* the map function maps all the objects stored in posts array using the Posts Template */}
     {posts.map(
             item=>(
               <Posts
