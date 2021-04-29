@@ -7,16 +7,24 @@ import {useHistory, useParams} from 'react-router-dom';
 
 
 function Comm_feed_route(props) {
+  // id is obtained from user-entered URL
+  // id is the name of the community whose feed is to be rendered
     const {id} =  useParams()
-    console.log({id}, props.token, props.user)
+
+
   return (
     <div className="cm-feed">
+    {/* render sidebar */}
     <Sidebar/>
+    
+    {/* pass community name, cookies and token to the feed component */}
     <Feed
         Community_name= {id}
         user = {props.user}
         token = {props.token}
     />
+
+    {/* render widgets */}
     <Widgets/>
     </div>
   );
