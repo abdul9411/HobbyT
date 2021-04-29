@@ -3,17 +3,24 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import './Likebutton.css'
 import axios from 'axios'
 
-// it takes two takes to dislike
 
 function Likebutton({post_id, 
     user_id,
-    likeCount}) {
+    }) {
       
     const[likestate, changelikestate]= useState("unliked")
     const[receiverUser, updateReceiveruser] = useState(0);
     const[nooflikes, changelikeno]= useState(0)
     const [postdata, updatepostdata]=useState("")
 
+
+      /**
+   * fetches user id of postmaker from post_id
+   * sets user_id to receiverUser
+   * fetches content of posts from post_id
+   * sets content to postdata
+   * if error in fetching any, error is console logged
+   */
     useEffect(() => {
       axios.get(`http://localhost:3001/api/post/postid`,{
       params: {
@@ -25,7 +32,13 @@ function Likebutton({post_id,
         updatepostdata(response.data[0].content)
       })
     }, []);
-    
+
+
+      /**
+   * checks if user has liked the post
+   * if an entry is found with user_id liking the post the button state is changed to liked
+   * if an error is caught, it is displayed
+   */
     useEffect(() => {
         axios.get(`http://localhost:3001/api/likepost/query`,{
         params: {
@@ -38,6 +51,11 @@ function Likebutton({post_id,
         }).catch((err)=>{console.log(err)})
       }, [post_id, likestate]);
      
+
+        /**
+   * Checks the number of likepost entries associated with the post
+   * the number of likepsot are tallied and the count is displayed as total number of likes
+   */
       useEffect(() => {
         axios.get(`http://localhost:3001/api/likepost/query`,{
         params: {
@@ -51,6 +69,12 @@ function Likebutton({post_id,
 
 const[likepostid, changelikepostid]= useState(0)
 
+  /**
+   * function triggered when like button is pressed
+   * if previous state was 'liked' it is changed to 'unliked' => likepost entry deleted from DB
+   * if previous state was 'unliked' it is changed to 'liked'=> likepost entry added to DB
+   * if an error is caught, it is displayed
+   */
       function updateLikes(){
         axios.get(`http://localhost:3001/api/likepost/query`,{
             params: {
@@ -103,6 +127,7 @@ const[likepostid, changelikepostid]= useState(0)
     return (
         <div>
         <button className="Likebutton" onClick={updateLikes}>
+        {/* changes like button color based on state of button */}
             <ArrowUpwardIcon className="arrowIcon" fontSize= "small"  style={{color: likestate === "liked" ? "blue" : "black"}}/>
             {nooflikes}
         </button>
