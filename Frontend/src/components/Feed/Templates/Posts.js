@@ -8,21 +8,35 @@ import Likebutton from './Likebutton.js'
 import axios from 'axios';
 import Collapsible from 'react-collapsible';
 
+
+  /**
+   * Posts template
+   * @param {string} username - user ID of user logged in
+   * @param {string} displayName - name of post maker
+   * @param {string} text - content of post
+   * @param {string} image - dp of post maker
+   * @param {date} timestamp - time of post
+   * @param {int} userid - id of user
+   * @param {int} likecount - no of likes on post
+   * @param {int} post_id - post ID 
+   */
+
 function Posts({
     username,
     displayName,
     text,
     image, 
-    avatar,
     timestamp,
     userid,
-    bio,
     likeCount,
     post_id
 }) {
 
   const[commID, changecommID]=useState(0)
 
+    /**
+   * get communityID of community where post was made from postID 
+   */
   useEffect(()=>{
     axios.get(`http://localhost:3001/api/post/postid`,{
       params:{
@@ -35,6 +49,11 @@ function Posts({
   },[post_id])
 
 
+    /**
+   * triggered when delete button is pressed
+   * if deletepost confirmed confirmDelete() is called
+   * else nothing
+   */
   function Deletepost(){
     confirmAlert({
       title: 'Deletion Confirmation',
@@ -52,15 +71,22 @@ function Posts({
     });
   }
 
+    /**
+   * deletes post
+   * deletes comments and likes associated with the post
+   * if error=> display the error
+   * refreshes window after deletion
+   */
+
   function confirmDelete(){
-    //delete the notifications
+    //delete the comments
       axios.delete('http://localhost:3001/api/comment/post',{
         data:{
           post_id: post_id
         }
         }).then((response)=>console.log(response))
         .catch((e)=>console.log(e))
-       //delete comments of post
+       //delete comments of likes and the post
        axios.delete('http://localhost:3001/api/likepost/post',{
         data:{
           post_id: post_id
@@ -75,7 +101,11 @@ function Posts({
     }
 
 
-    const[report, updatereport]= useState("")
+    /**
+   * triggered when report button is clicked
+   * prompts user to select category of report
+   * sends report to server
+   */
   function reportpost(){
     confirmAlert({
       title: `You have flagged post ${post_id} as inappropriate`,
@@ -101,6 +131,12 @@ function Posts({
       ]
     });
   }
+
+    /**
+   * handles report
+   * if report is made it sends data to server
+   * sends notification to user whose post has been reported
+   */
 
   function handlereport(props){
     alert(`Reported Post For ${props}`)
@@ -149,12 +185,7 @@ function Posts({
             post_id = {post_id}
             user_id = {userid}
             likeCount={likeCount}/> 
-            {/* //change here */}
-             
-            {/* <AddIcon fontSize="small" /> */}
-            {/* <div class="dropdown-container" tabindex="-1">
-            <div class="three-dots"></div>
-            <div class="dropdown"> */}
+            {/* displays report or delete button based on whether it is the user's post or someone else's */}
             <Collapsible trigger="•••">
             {username!==userid&& <div> <button onClick={(reportpost)} className="btn btn-sm btn-dark">Report Post</button></div>}
             {username===userid&& <div> <button onClick={Deletepost} className="btn btn-sm btn-danger">Delete Post</button></div>}
