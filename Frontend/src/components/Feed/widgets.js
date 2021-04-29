@@ -4,15 +4,26 @@ import "./widgets.css";
 import BootstrapCarousel from './Templates/carousel'
 import axios from "axios";
 import Avatar from 'react-avatar'
+
 function Community(){
   const[post, upd]=useState({})
   const[usern, updateusrn]=useState(0)
+
+  /**
+   * get post with highest like
+   * store it in post object
+   */
   useEffect(()=>{
     axios.get(`http://localhost:3001/api/post/likesort`)
     .then((response)=>{
       upd(response.data[0])
     })
   },[])
+
+  /**
+   * get list of all users, tally them up
+   * store the count in usern
+   */
   useEffect(()=>{
     axios.get(`http://localhost:3001/api/auth/user/all`)
     .then((response)=>{
