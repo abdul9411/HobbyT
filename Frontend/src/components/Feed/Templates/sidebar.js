@@ -14,7 +14,6 @@ import logo from './logo.png';
 function Sidebar() {
     return (
         <div className="sidebar-hobbyt">
-            {/* <h2>HobbyT</h2> */}
             <img className="img-hobbyt" src={logo} alt=''></img>
             <a href="/feed">
                 <SidebarOption
