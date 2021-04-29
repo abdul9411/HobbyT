@@ -6,7 +6,6 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-//avatar sending problem
 
 function Postbox(props) {
     const [postValue, submitPost]= useState("")
@@ -16,12 +15,23 @@ function Postbox(props) {
     const [name, changename]= useState ("")
     const [pic, changepic]= useState("")
     const [storeName, changestoreName] = useState("")
+
+
+    /**
+   * stored whatever is typed in postbox in the postValue string
+   * @param {Object} event
+   */
     function Posttext(event){
         submitPost(event.target.value);
     }
-    // console.log(props.community_id)
+ 
     const notify = () => toast("Post Succesful!")
 
+    /**
+   *fetch user name from user ID
+   * set storename and name to the fetched name
+   * if error is caught, it is displayed 
+   */
     useEffect(() => {
         axios.defaults.headers.common['x-auth-token'] = props.token;
         axios.get(`http://localhost:3001/api/auth/user/query`,{
@@ -40,7 +50,13 @@ function Postbox(props) {
       }, [myID]);
 
 
-
+/**
+   * makes a post
+   * checks if anonymous box is ticked
+   * if ticked, it sends the post object with an alias and a masked ID
+   * else the post object is sent with real name and ID of the user
+   * if an error is caught it is displayed
+   */
     function Postme(){
         console.log(check)
          if (check==="checked"){
@@ -82,6 +98,11 @@ function Postbox(props) {
          }
     }
 
+    /**
+   * if checkbox is clicked this function is triggered
+   * it changes the check hook to "checked" if previous state was "unchecked"
+   * and vice versa
+   */
 function Checker(){
     if (check==="unchecked"){
         changecheck("checked")
