@@ -1,6 +1,14 @@
 import React, { Component } from 'react'  
 import Carousel from 'react-bootstrap/Carousel'  
 import "./carousel.css"
+
+
+
+  /**
+   * this is a bootstrap carousel item
+   * image links for carousel items may be changed from here
+   */
+
 function BootstrapCarousel(props){  
                return (  
 
