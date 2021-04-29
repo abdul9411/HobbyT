@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from "@material-ui/core"
 import './Homefeedheader.css'
 
-//uses name
+
 
 function Homefeedheader(props) {
     return (
