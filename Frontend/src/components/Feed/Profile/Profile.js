@@ -8,7 +8,11 @@ function Profile(props) {
     const[bio, updatebio]=useState("")
     const[picture, updatepic]=useState("")
     
-    
+      /**
+   * fetches user bio and other data using userID
+   * if data is returned, the bio and pic are set to the bio and picture empty strings
+   * else an error is displayed on the console
+   */
     useEffect(() => {
         axios.get(`http://localhost:3001/api/auth/user/query`,{
         params: {
@@ -26,6 +30,8 @@ function Profile(props) {
         <Sidebar
         token = {props.token}
          className="sidebar-notif"/>
+
+         {/* passes user data to the Profile_data templated for rendering profile */}
         <Profile_data
         icon ={picture}
         displayname= {props.user.name}
