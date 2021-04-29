@@ -7,6 +7,7 @@ function Community(props) {
     return (
         <div className="community-container">
         <Sidebar className="sidebar-notif"/>
+        {/* passes user cookies and token to community container template that renders list of communities */}
         <Community_container
             name="Community"
             user = {props.user}
