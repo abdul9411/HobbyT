@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from "@material-ui/core"
 import './Feedheader.css'
-// const Community_name = 'Physics'
+
 
 function Feedheader(props) {
     return (
