@@ -13,10 +13,20 @@ function Profile_data(props) {
     const [posts, setposts]= useState([])
     const [bioval, changebioval] = useState("")
     const [mybio, updatedbio]= useState(props.bio)
+
+      /**
+   * Changes mybio empty string to the bio obtained from props
+   */
     useEffect(()=>{
       updatedbio(props.bio)
       
     },[props.bio])
+
+    /**
+   * fetches all the posts made by the user
+   * sets the post objects to the posts empty array
+   * otherwise console log the error
+   */
     useEffect(() => {
       axios.defaults.headers.common['x-auth-token'] = props.token;
         axios.get(`http://localhost:3001/api/post/query`,{
@@ -26,13 +36,23 @@ function Profile_data(props) {
         })
         .then((response)=>{
           setposts(response.data)
-
-        })
+        }).catch((err=>{
+          console.log(err)
+        }))
       }, []);
 
+
+        /**
+   * changes bio val whenever the new bio value is set and the update button is pressed
+   * @param {Object} event
+   */
 function textme(event){
   changebioval(event.target.value)
 }
+
+  /**
+   * when bio is updated, this function sends the bio value to the database for storing it
+   */
      function updateBio(){
         axios.defaults.headers.common['x-auth-token'] = props.token;
         const bio = bioval
@@ -52,7 +72,7 @@ function textme(event){
             name= "Profile"
            />
            <div className="prof-desc">
-           {/* need to adjust size */}
+           {/* render profile */}
             <Avatar color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue'])} round={true} name={props.displayname} className="prof-pic"/>
             <div className="dp-name">{props.displayname} (@{props.username})</div>
             <div className= "bio">{mybio}</div>
@@ -64,6 +84,8 @@ function textme(event){
             <Button onClick={updateBio} >Update Bio</Button>
             </Collapsible>
             </div>
+
+            {/* this maps all the posts of the user from posts array of objects using the Posts template */}
             {posts.map(
             item=>(
               <Posts
@@ -79,7 +101,6 @@ function textme(event){
             )
           )}
             <div className="footer-of-profile">No more items to show</div>
-            {/* templates should be replaced */}
         </div>
     );
 }
