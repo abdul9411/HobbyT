@@ -12,6 +12,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { authenticationService } from '../Services/authenticationService';
 import history from '../Utilities/history';
 
+// layout and design
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
