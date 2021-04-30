@@ -1,3 +1,5 @@
+// used to obtain a user's initials
+
 // eslint-disable-next-line
 export default {
   getInitialsFromName: (name) => {
