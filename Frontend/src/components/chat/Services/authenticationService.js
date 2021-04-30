@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import useHandleResponse from '../Utilities/handle-response';
 
+// to get the current user
+
 const currentUserSubject = new BehaviorSubject(
     JSON.parse(localStorage.getItem('currentUser'))
 );
