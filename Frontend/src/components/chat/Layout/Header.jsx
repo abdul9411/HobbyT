@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+// top bar of chat page that contains a drop down menu
 const Header = () => {
     const [currentUser] = useState(authenticationService.currentUserValue);
     const [anchorEl, setAnchorEl] = useState(null);
