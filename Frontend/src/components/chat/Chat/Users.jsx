@@ -10,6 +10,7 @@ import socketIOClient from "socket.io-client";
 import { useGetUsers } from "../Services/userService";
 import commonUtilites from "../Utilities/common";
 
+// layout and design
 const useStyles = makeStyles((theme) => ({
   subheader: {
     display: "flex",
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// to display information of the users
 const Users = (props) => {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
