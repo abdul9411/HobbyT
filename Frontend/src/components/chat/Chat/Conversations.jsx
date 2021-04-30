@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// displays the list of conversations, to the left of the chatbox
 const Conversations = (props) => {
   const classes = useStyles();
   const [conversations, setConversations] = useState([]);
   const [newConversation, setNewConversation] = useState(null);
   const getConversations = useGetConversations();
 
-  // Returns the recipient name that does not
-  // belong to the current user.
+  // Returns the recipient name that does not belong to the current user.
   const handleRecipient = (recipients) => {
     for (let i = 0; i < recipients.length; i++) {
       if (
