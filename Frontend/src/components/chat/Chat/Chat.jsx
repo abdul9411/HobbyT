@@ -13,6 +13,7 @@ import ChatBox from "./ChatBox";
 import Conversations from "./Conversations";
 import Header from "../Layout/Header";
 
+// layout and design
 const useStyles = makeStyles(theme => ({
     paper:
     {
@@ -39,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+// overall chat page design
 const Chat = () => {
     const [scope, setScope] = useState('Global Chat');
     const [tab, setTab] = useState(0);
