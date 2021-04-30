@@ -3,6 +3,7 @@ import { useSnackbar } from 'notistack';
 import useHandleResponse from '../Utilities/handle-response';
 import authHeader from '../Utilities/auth-header';
 
+// get list of users from the backend using 'fetch'
 export function useGetUsers() {
     const { enqueueSnackbar } = useSnackbar();
     const handleResponse = useHandleResponse();
