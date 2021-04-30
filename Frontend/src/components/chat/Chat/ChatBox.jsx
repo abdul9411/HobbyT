@@ -23,6 +23,7 @@ import {
 } from "../Services/chatService";
 import { authenticationService } from "../Services/authenticationService";
 
+// layout and design
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
@@ -82,6 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// chatbox where the conversation messages are visible
 const ChatBox = (props) => {
   const [currentUserId] = useState(
     authenticationService.currentUserValue.userId
