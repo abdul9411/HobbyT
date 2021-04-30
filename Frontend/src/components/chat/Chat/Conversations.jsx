@@ -13,6 +13,7 @@ import { useGetConversations } from "../Services/chatService";
 import { authenticationService } from "../Services/authenticationService";
 import commonUtilites from "../Utilities/common";
 
+// layout and design
 const useStyles = makeStyles((theme) => ({
   subheader: {
     display: "flex",
