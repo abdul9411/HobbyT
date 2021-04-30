@@ -2,6 +2,7 @@ import { useSnackbar } from 'notistack';
 
 import { authenticationService } from '../Services/authenticationService';
 
+// handles the response by parsing JSON
 const useHandleResponse = () => {
     const { enqueueSnackbar } = useSnackbar();
 
